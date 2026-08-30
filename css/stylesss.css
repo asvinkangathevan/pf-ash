@@ -1,0 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+
+/* =========================================
+   VARIABLES - TES COULEURS
+   ========================================= */
+:root {
+  --bg-deep: #050214;       /* Fond très sombre */
+  --bg-light: #1a103c;      /* Fond légèrement plus clair */
+  --accent-violet: #8b5cf6; /* Ton Violet */
+  --accent-blue: #6366f1;   /* Ton Bleu Indigo */
+  --text-main: #f0f4f8;     /* Texte clair */
+  --text-muted: #94a3b8;    /* Texte gris */
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lexend", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text-main);
+  overflow-x: hidden;
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-light) 100%);
+  min-height: 100vh;
+}
+
+/* =========================================
+   BACKGROUND ANIMÉ (Style "Orbes Flottants")
+   ========================================= */
+.bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Derrière tout */
+  overflow: hidden;
+  background: radial-gradient(ellipse at 20% 20%, #1e293b 0%, #0f172a 40%, #020617 100%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px); /* Le secret de l'effet doux */
+  opacity: 0.6;
+  animation: orbFloat linear infinite;
+  mix-blend-mode: screen;
+}
+
+/* Orbe 1 : Violet dominant (Haut Gauche) */
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--accent-violet) 0%, #4c1d95 40%, transparent 70%);
+  top: -150px; left: -150px;
+  animation-duration: 25s;
+  animation-name: orbFloat1;
+}
+
+/* Orbe 2 : Bleu dominant (Droite) */
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--accent-blue) 0%, #312e81 40%, transparent 70%);
+  top: 30%; right: -100px;
+  animation-duration: 28s;
+  animation-name: orbFloat2;
+  opacity: 0.5;
+}
+
+/* Orbe 3 : Mélange (Bas Gauche) */
+.orb-3 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, #a78bfa 0%, #4c1d95 40%, transparent 70%);
+  bottom: 10%; left: 20%;
+  animation-duration: 22s;
+  animation-name: orbFloat3;
+  opacity: 0.4;
+}
+
+/* Orbe 4 : Bleu profond (Milieu Droite) */
+.orb-4 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, var(--accent-blue) 0%, #1e1b4b 40%, transparent 70%);
+  top: 60%; right: 25%;
+  animation-duration: 30s;
+  animation-name: orbFloat4;
+  opacity: 0.35;
+}
+
+/* Orbe 5 : Violet clair (Centre Haut) */
+.orb-5 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #c4b5fd 0%, #7c3aed 40%, transparent 70%);
+  top: 15%; left: 50%;
+  animation-duration: 24s;
+  animation-name: orbFloat5;
+  opacity: 0.3;
+}
+
+/* Animations de mouvement des orbes */
+@keyframes orbFloat1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  25%  { transform: translate(80px, 60px) scale(1.1); }
+  50%  { transform: translate(30px, 120px) scale(0.95); }
+  75%  { transform: translate(-40px, 50px) scale(1.05); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbFloat2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(-70px, 80px) scale(1.08); }
+  66%  { transform: translate(-100px, 20px) scale(0.92); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbFloat3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(60px, -50px) scale(1.12); }
+  80%  { transform: translate(-30px, -80px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbFloat4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  30%  { transform: translate(-80px, -40px) scale(1.06); }
+  60%  { transform: translate(40px, -70px) scale(0.94); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbFloat5 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(-50px, 90px) scale(1.15); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+/* Effet de grille/subtilité sur le fond */
+.bg-canvas::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(139, 92, 246, 0.01) 3px,
+    rgba(139, 92, 246, 0.01) 4px
+  );
+  pointer-events: none;
+}
+
+/* =========================================
+   HEADER (Style Glassmorphism Sombre)
+   ========================================= */
+.header-area {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
+    background: rgba(5, 2, 20, 0.7) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 60px;
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.1);
+    
+    max-width: 95%;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.header-area.scrolled {
+    top: 10px;
+    background: rgba(5, 2, 20, 0.85) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 25px;
+    gap: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid rgba(139, 92, 246, 0.3);
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.navbar-modern {
+    position: static !important;
+    flex: 1;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: transparent !important;
+    width: auto !important;
+    height: auto !important;
+    right: auto !important;
+    top: auto !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow-x: visible;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 30px;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.nav-link:hover {
+    color: var(--accent-violet);
+    background: rgba(139, 92, 246, 0.1);
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-blue) 100%);
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+    transform: scale(1.05);
+    border: none;
+    padding: 10px 22px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.mobile-menu {
+    display: none;
+    color: var(--accent-violet);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* =========================================
+   HERO SECTION
+   ========================================= */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 50px;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-photo {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.photo-frame {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 3px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 
+        0 0 30px rgba(139, 92, 246, 0.3),
+        inset 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-frame:hover img {
+    transform: scale(1.05);
+}
+
+/* Cercles orbitaux décoratifs autour de la photo */
+.profile-photo::before, .profile-photo::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(139, 92, 246, 0.3);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    animation: spin linear infinite;
+}
+
+.profile-photo::before {
+    width: 460px; height: 460px;
+    animation-duration: 20s;
+}
+
+.profile-photo::after {
+    width: 540px; height: 540px;
+    border-color: rgba(139, 92, 246, 0.15);
+    animation-duration: 30s;
+    animation-direction: reverse;
+}
+
+@keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.profile-text {
+    flex: 1;
+    color: #ffffff;
+    text-align: left;
+}
+
+.profile-text h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.profile-text h1 span {
+    color: var(--accent-violet);
+}
+
+.profile-text p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.8;
+    max-width: 650px;
+}
+
+.btn-group {
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 35px;
+    background: linear-gradient(90deg, var(--accent-violet) 0%, var(--accent-blue) 100%);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 5px 25px rgba(139, 92, 246, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.6);
+}
+
+.social {
+    display: flex;
+    gap: 15px;
+}
+
+.social a {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    border-radius: 8px;
+    color: var(--accent-violet);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social a:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: var(--accent-violet);
+    color: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 1024px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .profile-text { text-align: center; }
+    .profile-text p { margin: 0 auto 40px; }
+    .social { justify-content: center; }
+    .photo-frame { width: 320px; height: 320px; }
+    .profile-photo::before { width: 380px; height: 380px; }
+    .profile-photo::after { width: 460px; height: 460px; }
+    .profile-text h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+    .hero-section { padding-top: 80px; padding-left: 20px; padding-right: 20px; }
+    .photo-frame { width: 260px; height: 260px; }
+    .profile-photo::before { width: 320px; height: 320px; }
+    .profile-photo::after { width: 400px; height: 400px; }
+    .profile-text h1 { font-size: 2rem; }
+    .profile-text p { font-size: 1rem; }
+    .btn { padding: 12px 30px; font-size: 1rem; }
+    .social a { width: 40px; height: 40px; font-size: 1.1rem; }
+}
