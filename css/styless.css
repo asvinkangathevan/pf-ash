@@ -2592,3 +2592,60 @@ body > section, main > section, #competences, .competences-area, .experiences-ar
 .theme-btn {
     border-radius: 0 !important;
 }
+
+/* N°28 BLACK HOLE — correction: animation sans transform/opacity !important */
+.blackhole28-card{position:relative;isolation:isolate;border-radius:0!important}
+.blackhole28-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;overflow:hidden;opacity:0;border-radius:0;display:block}
+.blackhole28-overlay::before{content:"";position:absolute;left:50%;top:50%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#000 0 18%,#10041e 20%,#3b16a3 25%,#a68cff 29%,#7047ff 34%,rgba(112,71,255,.22) 42%,transparent 66%),repeating-conic-gradient(from 0deg,#7047ff 0deg 9deg,transparent 13deg 24deg,#b49fff 27deg 30deg,transparent 35deg 45deg);box-shadow:0 0 35px #7047ff88;filter:drop-shadow(0 0 10px #7047ff);transform:translate(-50%,-50%) scale(.05);opacity:0}
+.blackhole28-card.blackhole28-active>.blackhole28-overlay{opacity:1}
+.blackhole28-card.blackhole28-active>.blackhole28-overlay::before{animation:blackhole28-vortex 1.3s cubic-bezier(.18,.75,.22,1) both}
+.blackhole28-card.blackhole28-active{animation:blackhole28-pulse 1.3s ease-out}
+@keyframes blackhole28-vortex{0%{transform:translate(-50%,-50%) scale(.05) rotate(0deg);opacity:0}18%{opacity:1}60%{transform:translate(-50%,-50%) scale(1.05) rotate(360deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1.8) rotate(720deg);opacity:0}}
+@keyframes blackhole28-pulse{0%,100%{box-shadow:0 12px 38px #0003}50%{box-shadow:0 0 30px #7047ff99,0 0 55px #7047ff44}}
+@media(prefers-reduced-motion:reduce){.blackhole28-card.blackhole28-active,.blackhole28-card.blackhole28-active>.blackhole28-overlay::before{animation:none}}
+
+/* =========================================================
+   CORRECTION VEILLE TECHNOLOGIQUE — IDS / NDR / SIEM
+   Limitee a #veille : aucune autre section modifiee.
+   ========================================================= */
+#veille .applications-area .app-content { min-width: 0; }
+#veille .applications-area .app-content h4 {
+    font-family: Manrope, Inter, sans-serif;
+    font-size: 11px;
+    line-height: 1.45;
+    font-weight: 700;
+    margin: 0 0 7px;
+    color: #f8f6ff;
+}
+#veille .applications-area .app-content p,
+#veille .applications-area .app-content li {
+    font-family: Inter, Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.65;
+    font-weight: 400;
+    color: #b8b2c0;
+    margin: 0 0 6px;
+    opacity: 1;
+}
+#veille .applications-area .app-content p:last-child { margin-bottom: 0; }
+#veille .applications-area .app-content strong {
+    font-size: inherit;
+    font-weight: 700;
+    color: #eee9ff;
+}
+#veille .applications-area .app-content a {
+    font-size: inherit;
+    color: #a992ff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    overflow-wrap: anywhere;
+}
+#veille .applications-area .application-item {
+    padding: 16px;
+    align-content: start;
+}
+@media (max-width: 650px) {
+    #veille .applications-area .app-content p,
+    #veille .applications-area .app-content li { font-size: 10px; line-height: 1.6; }
+    #veille .applications-area .app-content h4 { font-size: 11px; }
+}
