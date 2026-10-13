@@ -325,6 +325,8 @@
 </div>
 <div class="project-description">
 <p>Plateforme complète de location de voitures en ligne. Combine infrastructure, réseau, système et développement web (HTML, CSS, PHP, SQL).</p>
+<a class="team-member" href="tds/CDC V1.pdf">Cahier des charges</a>
+
 <div class="team-section">
 <p class="team-label">Participants :</p>
 <div class="team-members">
@@ -693,376 +695,207 @@
 
 
 
-<!-- Section Veille Technologique : Security Onion -->
+
+<!-- SECTION VEILLE TECHNOLOGIQUE -->
 <section class="watch-area" id="veille">
     <div class="container">
-
-        <!-- Titre -->
+        <!-- TITRE -->
         <div class="section-title">
             <h2>VEILLE TECHNOLOGIQUE</h2>
             <div class="title-line"></div>
         </div>
-
-        <!-- Thème principal -->
+        <!-- THÈME PRINCIPAL -->
         <div class="theme-banner animate-on-scroll">
             <div class="theme-icon">
                 <i class="fa fa-shield-alt"></i>
             </div>
-
             <div class="theme-content">
-                <span class="theme-label">Thème Principal</span>
-                <h1>Security Onion &amp; Détection des Cyberattaques Réseau</h1>
+                <span class="theme-label">Thème principal</span>
+                <h1>L'évolution des technologies de détection des cyberattaques réseau : IDS, NDR et SIEM</h1>
             </div>
-
-            <a class="theme-btn"
-               href="tds/Security Onion et détection des cyberattaques réseau.pdf"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fa fa-file-pdf"></i>
-                Lire le document
+            <a class="theme-btn" href="tds/Security Onion et détection des cyberattaques réseau.pdf" target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-file-pdf"></i> Lire le document
             </a>
         </div>
-
-        <!-- Présentation courte -->
+        <!-- INTRODUCTION -->
         <div class="theme-description animate-on-scroll">
-            <p>
-                <strong>Security Onion</strong>, une plateforme
-                open source spécialisée dans la surveillance
-                et la détection des intrusions réseau.
-                Elle permet de centraliser les alertes,
-                d'analyser le trafic et de faciliter
-                les investigations de cybersécurité.
-            </p>
+            <h3>Présentation de la veille</h3>
+            <p>Face à l'évolution des cyberattaques, les entreprises doivent renforcer la surveillance de leurs systèmes d'information. Les technologies IDS, NDR et SIEM permettent de détecter les activités suspectes, d'analyser les événements de sécurité et de faciliter les investigations.</p>
+            <p>Cette veille technologique consiste à suivre les innovations, les nouvelles versions et les améliorations de ces solutions afin de comprendre leur évolution et leur impact sur la cybersécurité des entreprises.</p>
+            <h4>Problématique</h4>
+            <p><strong>Comment les technologies IDS, NDR et SIEM évoluent-elles pour améliorer la détection des cyberattaques et la protection des réseaux d'entreprise ?</strong></p>
         </div>
-
-        <!-- Points clés -->
+        <!-- TECHNOLOGIES ÉTUDIÉES -->
         <div class="key-points-grid">
-
             <div class="section-subtitle animate-on-scroll">
-                <h3>Points Clés de la Veille</h3>
+                <h3>Technologies étudiées</h3>
                 <div class="subtitle-line"></div>
             </div>
-
             <div class="points-container">
-
                 <div class="point-card animate-on-scroll">
                     <div class="point-number">01</div>
-                    <div class="point-icon">
-                        <i class="fa fa-shield-alt"></i>
-                    </div>
+                    <div class="point-icon"><i class="fa fa-shield-alt"></i></div>
                     <div class="point-content">
-                        <h4>Détection des intrusions</h4>
-                        <p>
-                            Surveillance des activités réseau
-                            et identification des comportements
-                            suspects avec Suricata.
-                        </p>
+                        <h4>IDS - Intrusion Detection System</h4>
+                        <p>Un IDS surveille le trafic réseau ou les activités d'un système afin de détecter des comportements suspects ou des signatures d'attaques. Il génère des alertes pour les administrateurs. Exemple : Suricata.</p>
                     </div>
                 </div>
-
                 <div class="point-card animate-on-scroll">
                     <div class="point-number">02</div>
-                    <div class="point-icon">
-                        <i class="fa fa-network-wired"></i>
-                    </div>
+                    <div class="point-icon"><i class="fa fa-network-wired"></i></div>
                     <div class="point-content">
-                        <h4>Analyse du trafic réseau</h4>
-                        <p>
-                            Analyse des connexions et des
-                            protocoles réseau avec Zeek.
-                        </p>
+                        <h4>NDR - Network Detection and Response</h4>
+                        <p>Le NDR analyse les communications réseau afin d'identifier des activités malveillantes, notamment les mouvements latéraux et les comportements anormaux. Il aide les équipes de sécurité à enquêter et à réagir aux incidents.</p>
                     </div>
                 </div>
-
                 <div class="point-card animate-on-scroll">
                     <div class="point-number">03</div>
-                    <div class="point-icon">
-                        <i class="fa fa-bell"></i>
-                    </div>
+                    <div class="point-icon"><i class="fa fa-bell"></i></div>
                     <div class="point-content">
-                        <h4>Centralisation des alertes</h4>
-                        <p>
-                            Consultation et analyse
-                            des événements de sécurité
-                            dans Security Onion Console.
-                        </p>
+                        <h4>SIEM - Security Information and Event Management</h4>
+                        <p>Un SIEM centralise les journaux et événements provenant des serveurs, équipements réseau et applications. Il permet de rechercher, corréler et analyser ces données afin d'identifier des incidents de sécurité. Exemple : Wazuh.</p>
                     </div>
                 </div>
-
                 <div class="point-card animate-on-scroll">
                     <div class="point-number">04</div>
-                    <div class="point-icon">
-                        <i class="fa fa-search"></i>
-                    </div>
+                    <div class="point-icon"><i class="fa fa-search"></i></div>
                     <div class="point-content">
-                        <h4>Investigation des incidents</h4>
-                        <p>
-                            Exploitation des journaux
-                            et des captures réseau PCAP
-                            pour analyser les incidents.
-                        </p>
+                        <h4>Security Onion</h4>
+                        <p>Security Onion est une plateforme de surveillance et d'investigation de sécurité qui intègre notamment Suricata et Zeek. Elle permet d'exploiter les alertes, les journaux et les données réseau pour analyser les incidents.</p>
                     </div>
                 </div>
-
-                <div class="point-card animate-on-scroll">
-                    <div class="point-number">05</div>
-                    <div class="point-icon">
-                        <i class="fa fa-sync-alt"></i>
-                    </div>
-                    <div class="point-content">
-                        <h4>Évolution de la plateforme</h4>
-                        <p>
-                            Suivi des nouvelles versions,
-                            des mises à jour et des
-                            améliorations de Security Onion.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="point-card animate-on-scroll">
-                    <div class="point-number">06</div>
-                    <div class="point-icon">
-                        <i class="fa fa-code-branch"></i>
-                    </div>
-                    <div class="point-content">
-                        <h4>Évolution des outils intégrés</h4>
-                        <p>
-                            Suivi des nouveautés de Suricata,
-                            Zeek et des technologies
-                            utilisées par Security Onion.
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </div>
-
-        <!-- Applications concrètes -->
+        <!-- COMPARAISON -->
         <div class="applications-area">
-
             <div class="section-subtitle animate-on-scroll">
-                <h3>Applications Concrètes</h3>
+                <h3>Comparaison des technologies</h3>
                 <div class="subtitle-line"></div>
             </div>
-
             <div class="applications-list">
-
                 <div class="application-item animate-on-scroll">
-                    <div class="app-icon">
-                        <i class="fa fa-network-wired"></i>
-                    </div>
+                    <div class="app-icon"><i class="fa fa-shield-alt"></i></div>
                     <div class="app-content">
-                        <h4>Surveillance du réseau</h4>
-                        <ul>
-                            <li>
-                                Observation du trafic réseau
-                                entre les équipements.
-                            </li>
-                            <li>
-                                Identification des connexions
-                                et activités inhabituelles.
-                            </li>
-                        </ul>
+                        <h4>IDS : détecter les intrusions</h4>
+                        <p><strong>Fonction :</strong> analyser les activités et produire des alertes.</p>
+                        <p><strong>Avantage :</strong> identifier rapidement des attaques connues à partir de signatures.</p>
+                        <p><strong>Limite :</strong> certaines attaques inconnues ou communications chiffrées peuvent être difficiles à détecter.</p>
                     </div>
                 </div>
-
                 <div class="application-item animate-on-scroll">
-                    <div class="app-icon">
-                        <i class="fa fa-shield-alt"></i>
-                    </div>
+                    <div class="app-icon"><i class="fa fa-network-wired"></i></div>
                     <div class="app-content">
-                        <h4>Détection des attaques</h4>
-                        <ul>
-                            <li>
-                                Détection de certaines
-                                tentatives d'intrusion
-                                avec Suricata.
-                            </li>
-                            <li>
-                                Consultation des alertes
-                                de sécurité générées.
-                            </li>
-                        </ul>
+                        <h4>NDR : analyser les comportements réseau</h4>
+                        <p><strong>Fonction :</strong> surveiller les communications et rechercher des comportements suspects.</p>
+                        <p><strong>Avantage :</strong> aider à détecter des mouvements latéraux et des anomalies.</p>
+                        <p><strong>Limite :</strong> nécessite une bonne visibilité du réseau et un réglage adapté pour limiter les faux positifs.</p>
                     </div>
                 </div>
-
                 <div class="application-item animate-on-scroll">
-                    <div class="app-icon">
-                        <i class="fa fa-file-alt"></i>
-                    </div>
+                    <div class="app-icon"><i class="fa fa-bell"></i></div>
                     <div class="app-content">
-                        <h4>Analyse des journaux</h4>
-                        <ul>
-                            <li>
-                                Consultation des événements
-                                réseau produits par Zeek.
-                            </li>
-                            <li>
-                                Recherche d'informations
-                                sur les connexions suspectes.
-                            </li>
-                        </ul>
+                        <h4>SIEM : centraliser et corréler les événements</h4>
+                        <p><strong>Fonction :</strong> collecter et analyser les journaux de plusieurs équipements.</p>
+                        <p><strong>Avantage :</strong> rapprocher des événements provenant de sources différentes.</p>
+                        <p><strong>Limite :</strong> nécessite une collecte fiable, des règles pertinentes et une gestion du volume de données.</p>
                     </div>
                 </div>
-
-                <div class="application-item animate-on-scroll">
-                    <div class="app-icon">
-                        <i class="fa fa-search"></i>
-                    </div>
-                    <div class="app-content">
-                        <h4>Investigation réseau</h4>
-                        <ul>
-                            <li>
-                                Analyse des captures
-                                de paquets PCAP.
-                            </li>
-                            <li>
-                                Identification des machines
-                                concernées par un incident.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
         </div>
-
-        <!-- Sources recommandées -->
-        <div class="sources-area">
-
+        <!-- ACTUALITÉS TECHNOLOGIQUES -->
+        <div class="applications-area">
             <div class="section-subtitle animate-on-scroll">
-                <h3>Sources Recommandées</h3>
+                <h3>Actualités et évolutions technologiques</h3>
                 <div class="subtitle-line"></div>
             </div>
-
-            <div class="sources-grid">
-
-                <div class="source-category animate-on-scroll">
-                    <div class="category-icon">
-                        <i class="fa fa-building"></i>
+            <div class="applications-list">
+                <!-- SURICATA -->
+                <div class="application-item animate-on-scroll">
+                    <div class="app-icon"><i class="fa fa-shield-alt"></i></div>
+                    <div class="app-content">
+                        <h4>8 juillet 2025 - Sortie de Suricata 8.0</h4>
+                        <p><strong>Nouveauté :</strong> Suricata 8.0 introduit notamment un mode pare-feu expérimental et des améliorations de son moteur d'analyse du trafic.</p>
+                        <p><strong>Analyse technique :</strong> Suricata est principalement utilisé comme IDS ou IPS. L'évolution de ses fonctionnalités permet d'étendre ses possibilités de traitement des flux réseau. Le mode pare-feu expérimental représente une évolution vers un contrôle plus avancé du trafic.</p>
+                        <p><strong>Intérêt pour les entreprises :</strong> les administrateurs peuvent envisager de nouvelles méthodes de surveillance et de protection des réseaux.</p>
+                        <p><strong>Limites :</strong> une fonctionnalité expérimentale ne doit pas être déployée directement en production sans tests. Les performances dépendent aussi du matériel, des règles et du trafic analysé.</p>
+                        <p><strong>Source :</strong> <a href="https://suricata.io/2025/07/08/suricata-8-0-0-released/" target="_blank" rel="noopener noreferrer">Annonce officielle de Suricata 8.0</a></p>
                     </div>
-
-                    <h4>Sources Officielles</h4>
-
-                    <ul class="source-links">
-                        <li>
-                            <a href="https://securityonion.net/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Security Onion
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://docs.securityonion.net/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Documentation officielle
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://blog.securityonion.net/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Blog Security Onion
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="source-category animate-on-scroll">
-                    <div class="category-icon">
-                        <i class="fa fa-code"></i>
+                <!-- ZEEK -->
+                <div class="application-item animate-on-scroll">
+                    <div class="app-icon"><i class="fa fa-network-wired"></i></div>
+                    <div class="app-content">
+                        <h4>21 janvier 2026 - Sortie de Zeek 8.1</h4>
+                        <p><strong>Nouveauté :</strong> Zeek 8.1 adopte ZeroMQ comme système de communication par défaut entre les composants d'un cluster, à la place de Broker.</p>
+                        <p><strong>Analyse technique :</strong> dans un déploiement distribué, les composants de Zeek doivent échanger des informations. L'utilisation de ZeroMQ modifie cette communication et vise à améliorer son efficacité.</p>
+                        <p><strong>Intérêt pour les entreprises :</strong> cette évolution peut faciliter l'exploitation de Zeek dans les infrastructures utilisant plusieurs capteurs pour analyser un volume important de trafic.</p>
+                        <p><strong>Limites :</strong> les gains de performances dépendent de l'architecture déployée. Une migration nécessite de vérifier la compatibilité des configurations et des extensions.</p>
+                        <p><strong>Source :</strong> <a href="https://zeek.org/2026/01/introducing-zeek-8-1/" target="_blank" rel="noopener noreferrer">Annonce officielle de Zeek 8.1</a></p>
                     </div>
-
-                    <h4>Outils et Technologies</h4>
-
-                    <ul class="source-links">
-                        <li>
-                            <a href="https://suricata.io/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Suricata
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://zeek.org/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Zeek
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="source-category animate-on-scroll">
-                    <div class="category-icon">
-                        <i class="fa fa-shield-virus"></i>
+                <!-- SECURITY ONION -->
+                <div class="application-item animate-on-scroll">
+                    <div class="app-icon"><i class="fa fa-search"></i></div>
+                    <div class="app-content">
+                        <h4>Mars 2026 - Security Onion 2.4.210</h4>
+                        <p><strong>Nouveauté :</strong> cette version apporte notamment des évolutions liées aux intégrations de modèles d'intelligence artificielle et des mises à jour de composants de la plateforme.</p>
+                        <p><strong>Analyse technique :</strong> l'intégration d'outils d'assistance par IA peut aider les analystes à interpréter les informations de sécurité et à accélérer certaines étapes des investigations. Elle ne remplace cependant pas la validation humaine.</p>
+                        <p><strong>Intérêt pour les entreprises :</strong> une assistance à l'analyse peut contribuer à réduire le temps nécessaire pour examiner certaines alertes et comprendre un incident.</p>
+                        <p><strong>Limites :</strong> certaines fonctions sont réservées à Security Onion Pro. L'utilisation de modèles IA nécessite aussi de prendre en compte la confidentialité des données et les risques d'erreur.</p>
+                        <p><strong>Source :</strong> <a href="https://blog.securityonion.net/2026/03/security-onion-24210-now-available-with.html" target="_blank" rel="noopener noreferrer">Blog officiel Security Onion</a></p>
                     </div>
-
-                    <h4>Cybersécurité</h4>
-
-                    <ul class="source-links">
-                        <li>
-                            <a href="https://www.cert.ssi.gouv.fr/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                CERT-FR
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://attack.mitre.org/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                MITRE ATT&amp;CK
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="source-category animate-on-scroll">
-                    <div class="category-icon">
-                        <i class="fa fa-rss"></i>
-                    </div>
-
-                    <h4>Outils de Veille</h4>
-
-                    <ul class="source-links">
-                        <li>
-                            <a href="https://feedly.com/"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Feedly
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://www.google.com/alerts"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                <i class="fa fa-external-link-alt"></i>
-                                Google Alerts
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
             </div>
         </div>
-
+        
+        
+        <!-- SOURCES -->
+        <div class="sources-area">
+            <div class="section-subtitle animate-on-scroll">
+                <h3>Sources et outils de veille</h3>
+                <div class="subtitle-line"></div>
+            </div>
+            <div class="sources-grid">
+                <div class="source-category animate-on-scroll">
+                    <div class="category-icon"><i class="fa fa-building"></i></div>
+                    <h4>Sources officielles</h4>
+                    <ul class="source-links">
+                        <li><a href="https://securityonion.net/" target="_blank" rel="noopener noreferrer">Security Onion</a></li>
+                        <li><a href="https://blog.securityonion.net/" target="_blank" rel="noopener noreferrer">Blog Security Onion</a></li>
+                        <li><a href="https://docs.securityonion.net/" target="_blank" rel="noopener noreferrer">Documentation Security Onion</a></li>
+                    </ul>
+                </div>
+                <div class="source-category animate-on-scroll">
+                    <div class="category-icon"><i class="fa fa-code"></i></div>
+                    <h4>Outils et technologies</h4>
+                    <ul class="source-links">
+                        <li><a href="https://suricata.io/" target="_blank" rel="noopener noreferrer">Suricata</a></li>
+                        <li><a href="https://zeek.org/" target="_blank" rel="noopener noreferrer">Zeek</a></li>
+                        <li><a href="https://wazuh.com/" target="_blank" rel="noopener noreferrer">Wazuh</a></li>
+                    </ul>
+                </div>
+                <div class="source-category animate-on-scroll">
+                    <div class="category-icon"><i class="fa fa-shield-virus"></i></div>
+                    <h4>Cybersécurité</h4>
+                    <ul class="source-links">
+                        <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">CERT-FR</a></li>
+                        <li><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a></li>
+                    </ul>
+                </div>
+                <div class="source-category animate-on-scroll">
+                    <div class="category-icon"><i class="fa fa-rss"></i></div>
+                    <h4>Outils de veille</h4>
+                    <ul class="source-links">
+                        <li><a href="https://feedly.com/" target="_blank" rel="noopener noreferrer">Feedly</a></li>
+                        <li><a href="https://www.google.com/alerts" target="_blank" rel="noopener noreferrer">Google Alerts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+<!-- FIN SECTION VEILLE TECHNOLOGIQUE -->
+
 
 <!-------------------------- Footer Section -------------------------->
 <footer class="footer">
