@@ -1,10 +1,11 @@
+
+/* ==========================================================
+   PORTFOLIO BTS SIO SISR — SCRIPT.JS
+   Navigation, projets, certifications, animations
+   ========================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
-
     "use strict";
-
-    /* =========================================================
-       1. OUTILS
-    ========================================================= */
 
     const $ = (selector, parent = document) =>
         parent.querySelector(selector);
@@ -16,1890 +17,843 @@ document.addEventListener("DOMContentLoaded", () => {
         "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const scrollBehavior = reduceMotion
-        ? "auto"
-        : "smooth";
+    const scrollBehavior = reduceMotion ? "instant" : "smooth";
 
-
-    /* =========================================================
-       2. ELEMENTS PRINCIPAUX
-    ========================================================= */
-
-    const header = $(".header-area");
-    const nav = $(".navbar-modern");
-    const menu = $(".mobile-menu");
-    const navLinks = $$(".nav-link");
-    const sections = $$("section[id]");
-
-
-    /* =========================================================
-       3. BARRE DE PROGRESSION
-    ========================================================= */
+    /* ======================================================
+       1. BARRE DE PROGRESSION
+       ====================================================== */
 
     let progress = $(".scroll-progress");
 
     if (!progress) {
-
         progress = document.createElement("div");
         progress.className = "scroll-progress";
-
         document.body.prepend(progress);
-
     }
 
-
     function updateProgress() {
+        const maxScroll =
+            document.documentElement.scrollHeight - window.innerHeight;
 
-        const documentHeight =
-            document.documentElement.scrollHeight -
-            window.innerHeight;
-
-        const percentage =
-            documentHeight > 0
-                ? (window.scrollY / documentHeight) * 100
-                : 0;
+        const percentage = maxScroll > 0
+            ? (window.scrollY / maxScroll) * 100
+            : 0;
 
         progress.style.width =
             Math.min(100, Math.max(0, percentage)) + "%";
-
     }
 
+    /* ======================================================
+       2. NAVIGATION
+       ====================================================== */
 
-    /* =========================================================
-       4. PANNEAU TECHNIQUE HERO
-    ========================================================= */
+    const header = $(".header-area");
+    const nav = $(".navbar-modern");
+    const mobileMenu = $(".mobile-menu");
+    const navLinks = $$(".nav-link");
 
-    const hero = $(".hero-content");
+    const mainSections = [
+        "home",
+        "about",
+        "education",
+        "competences",
+        "experiences",
+        "pro",
+        "certi",
+        "tb",
+        "procedure",
+        "veille"
+    ].map(id => document.getElementById(id)).filter(Boolean);
 
-    if (
-        hero &&
-        !$(".hero-tech-panel", hero)
-    ) {
+    function closeMobileMenu() {
+        nav?.classList.remove("open");
 
-        const panel =
-            document.createElement("aside");
+        if (mobileMenu) {
+            mobileMenu.setAttribute("aria-expanded", "false");
 
-        panel.className =
-            "hero-tech-panel";
+            const icon = mobileMenu.querySelector("i");
 
-        panel.innerHTML = `
-            <div class="hero-tech-inner">
-
-                <span class="tech-kicker">
-                    SYSTEMS / NETWORK / SECURITY
-                </span>
-
-                <h2 class="tech-title">
-                    Infrastructure IT
-                </h2>
-
-                <div class="tech-grid">
-
-                    <div class="tech-chip">
-                        <small>Formation</small>
-                        <strong>BTS SIO</strong>
-                    </div>
-
-                    <div class="tech-chip">
-                        <small>Option</small>
-                        <strong>SISR</strong>
-                    </div>
-
-                    <div class="tech-chip">
-                        <small>Domaine</small>
-                        <strong>Systèmes</strong>
-                    </div>
-
-                    <div class="tech-chip">
-                        <small>Domaine</small>
-                        <strong>Réseaux</strong>
-                    </div>
-
-                </div>
-
-                <div class="tech-status">
-                    PORTFOLIO • 2026
-                </div>
-
-            </div>
-        `;
-
-        hero.appendChild(panel);
-
-    }
-
-
-    /* =========================================================
-       5. NUMEROTATION DES SECTIONS
-    ========================================================= */
-
-    $$(".section-title").forEach(
-        (title, index) => {
-
-            title.dataset.number =
-                String(index + 1).padStart(
-                    2,
-                    "0"
-                );
-
+            icon?.classList.remove("fa-times");
+            icon?.classList.add("fa-bars");
         }
-    );
-
-
-    /* =========================================================
-       6. MENU MOBILE
-    ========================================================= */
-
-    function closeMenu() {
-
-        if (!nav) return;
-
-        nav.classList.remove("open");
-
-        if (!menu) return;
-
-        menu.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        const icon = $("i", menu);
-
-        if (icon) {
-
-            icon.classList.add(
-                "fa-bars"
-            );
-
-            icon.classList.remove(
-                "fa-times"
-            );
-
-        }
-
     }
 
+    function toggleMobileMenu() {
+        if (!nav || !mobileMenu) return;
 
-    function toggleMenu() {
+        const isOpen = nav.classList.toggle("open");
 
-        if (!nav || !menu) return;
+        mobileMenu.setAttribute("aria-expanded", String(isOpen));
 
-        const isOpen =
-            nav.classList.toggle("open");
+        const icon = mobileMenu.querySelector("i");
 
-        menu.setAttribute(
-            "aria-expanded",
-            String(isOpen)
-        );
-
-        const icon = $("i", menu);
-
-        if (icon) {
-
-            icon.classList.toggle(
-                "fa-bars",
-                !isOpen
-            );
-
-            icon.classList.toggle(
-                "fa-times",
-                isOpen
-            );
-
-        }
-
+        icon?.classList.toggle("fa-bars", !isOpen);
+        icon?.classList.toggle("fa-times", isOpen);
     }
 
+    if (mobileMenu) {
+        mobileMenu.setAttribute("role", "button");
+        mobileMenu.setAttribute("tabindex", "0");
+        mobileMenu.setAttribute("aria-label", "Ouvrir le menu");
+        mobileMenu.setAttribute("aria-expanded", "false");
 
-    if (menu) {
+        mobileMenu.addEventListener("click", toggleMobileMenu);
 
-        menu.setAttribute(
-            "role",
-            "button"
-        );
-
-        menu.setAttribute(
-            "tabindex",
-            "0"
-        );
-
-        menu.setAttribute(
-            "aria-label",
-            "Ouvrir le menu"
-        );
-
-        menu.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-
-        menu.addEventListener(
-            "click",
-            toggleMenu
-        );
-
-
-        menu.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    toggleMenu();
-
-                }
-
+        mobileMenu.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleMobileMenu();
             }
-        );
-
+        });
     }
 
+    $$('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", event => {
+            const href = link.getAttribute("href");
 
-    navLinks.forEach(link => {
+            if (!href || href === "#") return;
 
-        link.addEventListener(
-            "click",
-            closeMenu
-        );
+            const target = document.getElementById(href.slice(1));
 
+            if (!target) return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: reduceMotion ? "auto" : "smooth",
+                block: "start"
+            });
+
+            closeMobileMenu();
+        });
     });
 
+  
+    /* ======================================================
+       4. NUMÉROTATION DES SECTIONS
+       ====================================================== */
 
-    /* =========================================================
-       7. SCROLL FLUIDE
-    ========================================================= */
+    $$(".section-title").forEach((element, index) => {
+        element.dataset.number =
+            String(index + 1).padStart(2, "0");
+    });
 
-    $$('a[href^="#"]').forEach(anchor => {
+    /* ======================================================
+       5. COMPÉTENCES
+       ====================================================== */
 
-        anchor.addEventListener(
-            "click",
-            event => {
+    const competences = $("#competences");
 
-                const href =
-                    anchor.getAttribute(
-                        "href"
+    if (competences) {
+        $$(".skills-tabs", competences).forEach(tab => {
+            tab.remove();
+        });
+
+        $$(".category-section", competences).forEach(category => {
+            category.hidden = false;
+            category.classList.add("active-category");
+            category.style.display = "block";
+            category.style.opacity = "1";
+            category.style.visibility = "visible";
+        });
+    }
+
+    /* ======================================================
+       6. DONNÉES DES PROJETS
+       ====================================================== */
+
+    const projectData = {
+        web: {
+            title: "Développement web",
+            description:
+                "Conception de sites et d'applications web.",
+            items: [
+                {
+                    title: "Portfolio personnel",
+                    description:
+                        "Conception d'un portfolio responsive avec HTML, CSS et JavaScript."
+                },
+                {
+                    title: "BookingAUTO",
+                    description:
+                        "Projet de développement d'une application web."
+                },
+                {
+                    title: "WordPress",
+                    description:
+                        "Installation et configuration du CMS WordPress.",
+                    pdf: "WordPress-Procedure.pdf"
+                }
+            ]
+        },
+
+        systemes: {
+            title: "Systèmes & Docker",
+            description:
+                "Virtualisation, administration Linux et déploiement de services.",
+            items: [
+                {
+                    title: "VirtualBox",
+                    description:
+                        "Création et configuration de machines virtuelles."
+                },
+                {
+                    title: "Linux Mint",
+                    description:
+                        "Installation et administration d'un système Linux Mint."
+                },
+                {
+                    title: "Ubuntu Server",
+                    description:
+                        "Installation et configuration d'un serveur Ubuntu."
+                },
+                {
+                    title: "Proxmox",
+                    description:
+                        "Travaux pratiques de virtualisation avec Proxmox VE."
+                },
+                {
+                    title: "LAMP",
+                    description:
+                        "Installation d'un environnement Linux, Apache, MariaDB et PHP.",
+                    pdf: "LAMP-Procedure.pdf"
+                },
+                {
+                    title: "Docker",
+                    description:
+                        "Déploiement et gestion de conteneurs Docker.",
+                    pdf: "Docker-Procedure.pdf"
+                },
+                {
+                    title: "Nextcloud",
+                    description:
+                        "Installation d'une plateforme de stockage et de partage.",
+                    pdf: "Nextcloud-Procedure.pdf"
+                },
+                {
+                    title: "Mattermost",
+                    description:
+                        "Déploiement d'une plateforme de communication collaborative."
+                },
+                {
+                    title: "Portainer",
+                    description:
+                        "Administration des conteneurs Docker via une interface web.",
+                    pdf: "Portainer-Procedure.pdf"
+                }
+            ]
+        },
+
+        reseau: {
+            title: "Infrastructure réseau",
+            description:
+                "Configuration, administration et analyse des réseaux.",
+            items: [
+                {
+                    title: "Cisco Packet Tracer",
+                    description:
+                        "Simulation et configuration d'infrastructures réseau."
+                },
+                {
+                    title: "VLAN",
+                    description:
+                        "Segmentation logique des réseaux et configuration des VLAN."
+                },
+                {
+                    title: "Routage",
+                    description:
+                        "Configuration et étude des communications entre réseaux."
+                },
+                {
+                    title: "NAT",
+                    description:
+                        "Configuration et analyse de la traduction d'adresses réseau."
+                },
+                {
+                    title: "Brassage réseau",
+                    description:
+                        "Raccordement et organisation des équipements réseau."
+                },
+                {
+                    title: "Switch",
+                    description:
+                        "Configuration et maintenance des commutateurs."
+                },
+                {
+                    title: "Wireshark",
+                    description:
+                        "Capture et analyse de trames et de paquets réseau."
+                }
+            ]
+        },
+
+        support: {
+            title: "Support & parc informatique",
+            description:
+                "Assistance aux utilisateurs et gestion du parc informatique.",
+            items: [
+                {
+                    title: "GLPI",
+                    description:
+                        "Installation et utilisation d'une solution de gestion de parc et de tickets.",
+                    pdf: "GLPI-Procedure.pdf"
+                },
+                {
+                    title: "OCS Inventory",
+                    description:
+                        "Inventaire et suivi des équipements informatiques."
+                },
+                {
+                    title: "Odoo",
+                    description:
+                        "Suivi et traitement des demandes d'assistance."
+                },
+                {
+                    title: "Active Directory",
+                    description:
+                        "Gestion des comptes utilisateurs et des postes Windows."
+                },
+                {
+                    title: "RustDesk",
+                    description:
+                        "Téléassistance et prise en main à distance."
+                },
+                {
+                    title: "Maintenance informatique",
+                    description:
+                        "Diagnostic, dépannage et préparation des postes."
+                }
+            ]
+        },
+
+        supervision: {
+            title: "Supervision",
+            description:
+                "Surveillance des systèmes et des infrastructures.",
+            items: [
+                {
+                    title: "Prometheus",
+                    description:
+                        "Collecte et exploitation des métriques système."
+                },
+                {
+                    title: "Grafana",
+                    description:
+                        "Création de tableaux de bord de supervision."
+                },
+                {
+                    title: "Windows Exporter",
+                    description:
+                        "Collecte des métriques des postes Windows."
+                },
+                {
+                    title: "Zabbix",
+                    description:
+                        "Supervision des équipements et des services.",
+                    pdf: "Zabbix-Procedure.pdf"
+                }
+            ]
+        },
+
+        securite: {
+            title: "Cybersécurité",
+            description:
+                "Protection des systèmes et détection des menaces.",
+            items: [
+                {
+                    title: "SafeLine",
+                    description:
+                        "Mise en place d'un pare-feu applicatif web."
+                },
+                {
+                    title: "CrowdSec",
+                    description:
+                        "Détection et prévention des comportements malveillants.",
+                    pdf: "CrowdSec-Procédure.pdf"
+                },
+                {
+                    title: "Suricata",
+                    description:
+                        "Analyse du trafic et détection des intrusions réseau.",
+                    pdf: "Suricata-Procedure.pdf"
+                },
+                {
+                    title: "UFW",
+                    description:
+                        "Configuration des règles de pare-feu Linux."
+                },
+                {
+                    title: "OpenSSH",
+                    description:
+                        "Administration et sécurisation des accès SSH.",
+                    pdf: "OpenSSH-Procedure.pdf"
+                },
+                {
+                    title: "Restic",
+                    description:
+                        "Mise en place de sauvegardes sécurisées.",
+                    pdf: "Restic-Procedure.pdf"
+                },
+                {
+                    title: "CTF",
+                    description:
+                        "Exercices pratiques de cybersécurité."
+                }
+            ]
+        }
+    };
+
+    /* ======================================================
+       7. PROJETS — AFFICHAGE DES RÉALISATIONS
+       ====================================================== */
+
+    const projectSection = $("#pro");
+
+    if (projectSection) {
+        const buttons = $$(".projet-open", projectSection);
+
+        const panel = $("#projets-detail");
+        const title = $("#detail-title");
+        const description = $("#detail-description");
+        const list = $("#detail-list");
+        const closeButton = $(".detail-close", projectSection);
+
+        let activeButton = null;
+
+        if (panel && title && description && list) {
+            function closeProjectDetails(restoreFocus = true) {
+                const previousButton = activeButton;
+
+                panel.hidden = true;
+                panel.classList.remove("open");
+
+                panel.style.removeProperty("display");
+
+                buttons.forEach(button => {
+                    button.setAttribute("aria-expanded", "false");
+                    button.classList.remove("active");
+                });
+
+                activeButton = null;
+
+                if (restoreFocus) {
+                    previousButton?.focus();
+                }
+            }
+
+            function createProjectItem(item) {
+                const card = document.createElement("article");
+                card.className = "detail-item";
+
+                const heading = document.createElement("h4");
+                heading.textContent = item.title;
+
+                const paragraph = document.createElement("p");
+                paragraph.textContent = item.description;
+
+                card.append(heading, paragraph);
+
+                if (item.pdf) {
+                    const link = document.createElement("a");
+
+                    // Les procédures sont dans le dossier tds/
+                    link.href =
+                        "tds/" + encodeURIComponent(item.pdf);
+
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.className = "detail-pdf";
+
+                    link.textContent =
+                        "Consulter la procédure PDF ↗";
+
+                    card.appendChild(link);
+                }
+
+                return card;
+            }
+
+            function openProjectDetails(category, button) {
+                const project = projectData[category];
+
+                if (!project) {
+                    console.error(
+                        "[PROJETS] Catégorie inconnue :",
+                        category
                     );
-
-                if (
-                    !href ||
-                    href === "#"
-                ) {
                     return;
                 }
 
-                const id =
-                    href.substring(1);
+                if (!panel.hidden && activeButton === button) {
+                    closeProjectDetails();
+                    return;
+                }
 
-                const target =
-                    document.getElementById(id);
+                title.textContent = project.title;
+                description.textContent = project.description;
 
-                if (!target) return;
+                const fragment = document.createDocumentFragment();
 
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior:
-                        scrollBehavior,
-
-                    block:
-                        "start"
+                project.items.forEach(item => {
+                    fragment.appendChild(createProjectItem(item));
                 });
 
-                closeMenu();
-
-            }
-        );
-
-    });
-
-
-    /* =========================================================
-       8. COMPETENCES
-       VERSION ROBUSTE
-    ========================================================= */
-
-    const competencesSection =
-        $("#competences");
-
-    if (competencesSection) {
-
-        const competencesContainer =
-            $(".container", competencesSection);
-
-        const categories =
-            $$(".category-section", competencesSection);
-
-
-        console.log(
-            "[COMPETENCES] Catégories trouvées :",
-            categories.length
-        );
-
-
-        if (
-            competencesContainer &&
-            categories.length > 0
-        ) {
-
-            /* -----------------------------------------
-               Supprimer ancienne barre
-            ----------------------------------------- */
-
-            const existingTabs =
-                $(".skills-tabs", competencesContainer);
-
-            if (existingTabs) {
-                existingTabs.remove();
-            }
-
-
-            /* -----------------------------------------
-               Créer barre
-            ----------------------------------------- */
-
-            const tabs =
-                document.createElement("div");
-
-            tabs.className =
-                "skills-tabs";
-
-            tabs.setAttribute(
-                "role",
-                "tablist"
-            );
-
-            tabs.setAttribute(
-                "aria-label",
-                "Catégories de compétences"
-            );
-
-
-            /* -----------------------------------------
-               Nettoyage initial
-            ----------------------------------------- */
-
-            categories.forEach(
-                (category, index) => {
-
-                    category.classList.remove(
-                        "active-category"
-                    );
-
-                    category.removeAttribute(
-                        "hidden"
-                    );
-
-                    category.setAttribute(
-                        "role",
-                        "tabpanel"
-                    );
-
-                    category.dataset.skillIndex =
-                        String(index);
-
-
-                    /*
-                     * IMPORTANT :
-                     * Les catégories ne doivent jamais
-                     * dépendre du reveal global.
-                     */
-
-                    category
-                        .querySelectorAll(
-                            ".reveal-item"
-                        )
-                        .forEach(element => {
-
-                            element.classList.remove(
-                                "reveal-item",
-                                "from-left",
-                                "from-right",
-                                "zoom-in"
-                            );
-
-                            element.classList.add(
-                                "is-visible"
-                            );
-
-                        });
-
-                }
-            );
-
-
-            /* -----------------------------------------
-               Afficher une catégorie
-            ----------------------------------------- */
-
-            function showCategory(index) {
-
-                const buttons =
-                    $$(".skills-tab", tabs);
-
-
-                categories.forEach(
-                    (category, categoryIndex) => {
-
-                        const active =
-                            categoryIndex === index;
-
-
-                        category.classList.toggle(
-                            "active-category",
-                            active
-                        );
-
-
-                        /*
-                         * On force le display.
-                         * Cela évite le problème
-                         * de section vide.
-                         */
-
-                        category.style.display =
-                            active
-                                ? "block"
-                                : "none";
-
-
-                        category.style.opacity =
-                            active
-                                ? "1"
-                                : "0";
-
-
-                        category.style.visibility =
-                            active
-                                ? "visible"
-                                : "hidden";
-
-
-                        category.style.filter =
-                            "none";
-
-
-                        category.style.transform =
-                            "none";
-
-
-                        category.setAttribute(
-                            "aria-hidden",
-                            String(!active)
-                        );
-
-
-                        if (active) {
-
-                            /*
-                             * Force également les enfants.
-                             */
-
-                            const visibleChildren =
-                                $$(
-                                    [
-                                        ".category-header",
-                                        ".skills-flow",
-                                        ".skill-badge"
-                                    ].join(","),
-                                    category
-                                );
-
-
-                            visibleChildren.forEach(
-                                element => {
-
-                                    element.style.opacity =
-                                        "1";
-
-                                    element.style.visibility =
-                                        "visible";
-
-                                    element.style.filter =
-                                        "none";
-
-                                    element.classList.add(
-                                        "is-visible"
-                                    );
-
-                                }
-                            );
-
-
-                            /*
-                             * Redémarrage de l'animation
-                             * CSS à chaque changement.
-                             */
-
-                            category.style.animation =
-                                "none";
-
-                            void category.offsetWidth;
-
-                            category.style.animation =
-                                "";
-
-                        }
-
-                    }
+                list.replaceChildren(fragment);
+
+                // Rendre le panneau visible
+                panel.hidden = false;
+                panel.classList.add("open");
+
+                panel.style.setProperty(
+                    "display",
+                    "block",
+                    "important"
                 );
 
-
-                buttons.forEach(
-                    (button, buttonIndex) => {
-
-                        const active =
-                            buttonIndex === index;
-
-                        button.classList.toggle(
-                            "active",
-                            active
-                        );
-
-                        button.setAttribute(
-                            "aria-selected",
-                            String(active)
-                        );
-
-                        button.tabIndex =
-                            active
-                                ? 0
-                                : -1;
-
-                    }
+                panel.style.setProperty(
+                    "visibility",
+                    "visible",
+                    "important"
                 );
 
+                panel.style.setProperty(
+                    "opacity",
+                    "1",
+                    "important"
+                );
+
+                panel.style.setProperty(
+                    "height",
+                    "auto",
+                    "important"
+                );
+
+                panel.style.setProperty(
+                    "max-height",
+                    "none",
+                    "important"
+                );
+
+                panel.style.setProperty(
+                    "overflow",
+                    "visible",
+                    "important"
+                );
+
+                activeButton = button;
+
+                buttons.forEach(current => {
+                    const isActive = current === button;
+
+                    current.setAttribute(
+                        "aria-expanded",
+                        String(isActive)
+                    );
+
+                    current.classList.toggle(
+                        "active",
+                        isActive
+                    );
+                });
+
+                requestAnimationFrame(() => {
+                    panel.scrollIntoView({
+                        behavior: reduceMotion ? "auto" : "smooth",
+                        block: "start"
+                    });
+                });
+
+                console.log(
+                    "[PROJETS] Réalisations affichées :",
+                    project.title
+                );
             }
 
+            buttons.forEach(button => {
+                button.addEventListener("click", event => {
+                    event.preventDefault();
+                    event.stopPropagation();
 
-            /* -----------------------------------------
-               Créer boutons
-            ----------------------------------------- */
-
-            categories.forEach(
-                (category, index) => {
-
-                    const heading =
-                        $(
-                            ".category-header h3",
-                            category
-                        );
-
-
-                    const categoryName =
-                        heading &&
-                        heading.textContent.trim()
-
-                            ? heading.textContent.trim()
-
-                            : `Catégorie ${index + 1}`;
-
-
-                    const button =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    button.type =
-                        "button";
-
-                    button.className =
-                        "skills-tab";
-
-                    button.textContent =
-                        categoryName;
-
-                    button.dataset.index =
-                        String(index);
-
-                    button.setAttribute(
-                        "role",
-                        "tab"
-                    );
-
-                    button.setAttribute(
-                        "aria-selected",
-                        "false"
-                    );
-
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            showCategory(index);
-
-                        }
-                    );
-
-
-                    /*
-                     * Navigation clavier
-                     */
-
-                    button.addEventListener(
-                        "keydown",
-                        event => {
-
-                            if (
-                                event.key !==
-                                    "ArrowRight" &&
-                                event.key !==
-                                    "ArrowLeft"
-                            ) {
-                                return;
-                            }
-
-
-                            event.preventDefault();
-
-
-                            let nextIndex =
-                                index;
-
-
-                            if (
-                                event.key ===
-                                "ArrowRight"
-                            ) {
-
-                                nextIndex =
-                                    (index + 1) %
-                                    categories.length;
-
-                            }
-
-
-                            if (
-                                event.key ===
-                                "ArrowLeft"
-                            ) {
-
-                                nextIndex =
-                                    (
-                                        index -
-                                        1 +
-                                        categories.length
-                                    ) %
-                                    categories.length;
-
-                            }
-
-
-                            showCategory(
-                                nextIndex
-                            );
-
-
-                            const nextButton =
-                                $$(
-                                    ".skills-tab",
-                                    tabs
-                                )[nextIndex];
-
-
-                            if (nextButton) {
-                                nextButton.focus();
-                            }
-
-                        }
-                    );
-
-
-                    tabs.appendChild(
+                    openProjectDetails(
+                        button.dataset.project,
                         button
                     );
-
-                }
-            );
-
-
-            /* -----------------------------------------
-               Insérer les onglets
-            ----------------------------------------- */
-
-            const sectionTitle =
-                $(
-                    ".section-title",
-                    competencesSection
-                );
-
-
-            if (sectionTitle) {
-
-                sectionTitle.insertAdjacentElement(
-                    "afterend",
-                    tabs
-                );
-
-            }
-
-            else {
-
-                competencesContainer.prepend(
-                    tabs
-                );
-
-            }
-
-
-            /* -----------------------------------------
-               TOUJOURS afficher la première
-            ----------------------------------------- */
-
-            showCategory(0);
-
-
-            console.log(
-                "[COMPETENCES] Première catégorie activée."
-            );
-
-        }
-
-        else {
-
-            console.warn(
-                "[COMPETENCES] Aucune .category-section trouvée."
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================
-       9. PROJETS — CLASSIFICATION
-    ========================================================= */
-
-    const projectGrid =
-        $(".projects-grid");
-
-    const projects =
-        $$(".project-card");
-
-
-    function classifyProject(text) {
-
-        const value =
-            text.toLowerCase();
-
-
-        if (
-            /safe|ctf|sécur|cyber|waf/.test(
-                value
-            )
-        ) {
-
-            return "Cyber";
-
-        }
-
-
-        if (
-            /réseau|packet|cisco|active directory|vlan/.test(
-                value
-            )
-        ) {
-
-            return "Réseau";
-
-        }
-
-
-        if (
-            /portfolio|booking|wordpress|lamp|apache|php/.test(
-                value
-            )
-        ) {
-
-            return "Web";
-
-        }
-
-
-        if (
-            /odoo|maintenance|rustdesk|ticket|numérisation/.test(
-                value
-            )
-        ) {
-
-            return "Support";
-
-        }
-
-
-        return "Systèmes";
-
-    }
-
-
-    /* =========================================================
-       10. FILTRES PROJETS
-    ========================================================= */
-
-    if (
-        projectGrid &&
-        projects.length > 0
-    ) {
-
-        projects.forEach(
-            (card, index) => {
-
-                card.dataset.category =
-                    classifyProject(
-                        card.textContent
-                    );
-
-                card.dataset.index =
-                    String(index);
-
-            }
-        );
-
-
-        const oldToolbar =
-            $(".project-toolbar");
-
-        if (oldToolbar) {
-            oldToolbar.remove();
-        }
-
-
-        const toolbar =
-            document.createElement("div");
-
-        toolbar.className =
-            "project-toolbar";
-
-
-        const filters =
-            document.createElement("div");
-
-        filters.className =
-            "project-filters";
-
-
-        const filterNames = [
-            "Tous",
-            "Réseau",
-            "Systèmes",
-            "Cyber",
-            "Web",
-            "Support"
-        ];
-
-
-        let currentFilter =
-            "Tous";
-
-        let expanded =
-            false;
-
-
-        const moreButton =
-            document.createElement(
-                "button"
-            );
-
-        moreButton.type =
-            "button";
-
-        moreButton.className =
-            "projects-more";
-
-        moreButton.textContent =
-            "Voir +";
-
-
-        function renderProjects() {
-
-            const matching =
-                projects.filter(card => {
-
-                    return (
-                        currentFilter === "Tous" ||
-                        card.dataset.category ===
-                            currentFilter
-                    );
-
                 });
-
-
-            projects.forEach(card => {
-
-                card.classList.add(
-                    "is-hidden"
-                );
-
             });
 
+            closeButton?.addEventListener("click", event => {
+                event.preventDefault();
+                closeProjectDetails();
+            });
 
-            matching.forEach(
-                (card, index) => {
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape" && !panel.hidden) {
+                    closeProjectDetails();
+                }
+            });
 
-                    const visible =
-                        expanded ||
-                        index < 6;
+            // Le panneau est fermé au chargement.
+            closeProjectDetails(false);
 
-                    card.classList.toggle(
-                        "is-hidden",
-                        !visible
-                    );
-
+            console.log(
+                "[PROJETS] Initialisation réussie :",
+                buttons.length,
+                "boutons."
+            );
+        } else {
+            console.error(
+                "[PROJETS] Éléments HTML manquants.",
+                {
+                    panel: !!panel,
+                    title: !!title,
+                    description: !!description,
+                    list: !!list
                 }
             );
-
-
-            const hasMore =
-                matching.length > 6;
-
-
-            moreButton.hidden =
-                !hasMore;
-
-
-            moreButton.textContent =
-                expanded
-                    ? "Voir moins"
-                    : "Voir +";
-
         }
-
-
-        filterNames.forEach(
-            (name, index) => {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.type =
-                    "button";
-
-                button.className =
-                    "project-filter";
-
-                button.textContent =
-                    name;
-
-
-                if (index === 0) {
-
-                    button.classList.add(
-                        "active"
-                    );
-
-                }
-
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        currentFilter =
-                            name;
-
-                        expanded =
-                            false;
-
-
-                        $$(
-                            ".project-filter",
-                            filters
-                        ).forEach(item => {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        });
-
-
-                        button.classList.add(
-                            "active"
-                        );
-
-
-                        renderProjects();
-
-                    }
-                );
-
-
-                filters.appendChild(
-                    button
-                );
-
-            }
-        );
-
-
-        moreButton.addEventListener(
-            "click",
-            () => {
-
-                expanded =
-                    !expanded;
-
-                renderProjects();
-
-            }
-        );
-
-
-        toolbar.appendChild(
-            filters
-        );
-
-        toolbar.appendChild(
-            moreButton
-        );
-
-
-        projectGrid.before(
-            toolbar
-        );
-
-
-        renderProjects();
-
     }
 
+    /* ======================================================
+       8. CERTIFICATIONS — CARROUSEL
+       ====================================================== */
 
-    /* =========================================================
-       11. MODALE PROJETS
-    ========================================================= */
+    const certifications = $(".certifications-grid");
 
-    if (projects.length > 0) {
-
-        const oldModal =
-            $(".project-modal");
-
-        if (oldModal) {
-            oldModal.remove();
-        }
-
-
-        const modal =
-            document.createElement("div");
-
-        modal.className =
-            "project-modal";
-
-        modal.setAttribute(
-            "role",
-            "dialog"
-        );
-
-        modal.setAttribute(
-            "aria-modal",
-            "true"
-        );
-
-        modal.setAttribute(
-            "aria-label",
-            "Détails du projet"
-        );
-
-
-        modal.innerHTML = `
-            <div class="project-modal-box">
-
-                <div class="project-modal-head">
-
-                    <h3></h3>
-
-                    <button
-                        type="button"
-                        class="project-modal-close"
-                        aria-label="Fermer"
-                    >
-                        <i class="fa fa-times"></i>
-                    </button>
-
-                </div>
-
-                <div class="project-modal-content"></div>
-
-            </div>
-        `;
-
-
-        document.body.appendChild(
-            modal
-        );
-
-
-        const closeButton =
-            $(".project-modal-close", modal);
-
-        let previousFocus =
-            null;
-
-
-        function closeModal() {
-
-            modal.classList.remove(
-                "open"
-            );
-
-            document.body.style.overflow =
-                "";
-
-            if (previousFocus) {
-                previousFocus.focus();
-            }
-
-        }
-
-
-        function openProjectModal(
-            card,
-            event
-        ) {
-
-            if (
-                event &&
-                event.target.closest("a")
-            ) {
-                return;
-            }
-
-
-            const title =
-                $(
-                    ".project-header h3",
-                    card
-                );
-
-
-            const description =
-                $(
-                    ".project-description",
-                    card
-                );
-
-
-            const modalTitle =
-                $(
-                    ".project-modal-head h3",
-                    modal
-                );
-
-
-            const content =
-                $(
-                    ".project-modal-content",
-                    modal
-                );
-
-
-            modalTitle.textContent =
-                title
-                    ? title.textContent.trim()
-                    : "Projet";
-
-
-            content.replaceChildren();
-
-
-            if (description) {
-
-                content.appendChild(
-                    description.cloneNode(
-                        true
-                    )
-                );
-
-            }
-
-
-            previousFocus =
-                document.activeElement;
-
-
-            modal.classList.add(
-                "open"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            closeButton.focus();
-
-        }
-
-
-        closeButton.addEventListener(
-            "click",
-            closeModal
-        );
-
-
-        modal.addEventListener(
-            "click",
-            event => {
-
-                if (
-                    event.target === modal
-                ) {
-
-                    closeModal();
-
-                }
-
-            }
-        );
-
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Escape" &&
-                    modal.classList.contains(
-                        "open"
-                    )
-                ) {
-
-                    closeModal();
-
-                }
-
-            }
-        );
-
-
-        projects.forEach(card => {
-
-            card.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-
-            card.addEventListener(
-                "click",
-                event => {
-
-                    openProjectModal(
-                        card,
-                        event
-                    );
-
-                }
-            );
-
-
-            card.addEventListener(
-                "keydown",
-                event => {
-
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
-
-                        if (
-                            event.target.closest(
-                                "a"
-                            )
-                        ) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        openProjectModal(
-                            card,
-                            event
-                        );
-
-                    }
-
-                }
-            );
-
-        });
-
-    }
-
-
-    /* =========================================================
-       12. CARROUSEL CERTIFICATIONS
-    ========================================================= */
-
-    const certGrid =
-        $(".certifications-grid");
-
-
-    if (certGrid) {
-
-        let shell =
-            certGrid.closest(
-                ".cert-carousel-shell"
-            );
-
+    if (certifications) {
+        let shell = certifications.closest(".cert-carousel-shell");
 
         if (!shell) {
+            shell = document.createElement("div");
+            shell.className = "cert-carousel-shell";
 
-            shell =
-                document.createElement(
-                    "div"
-                );
-
-            shell.className =
-                "cert-carousel-shell";
-
-
-            certGrid.parentNode.insertBefore(
+            certifications.parentNode.insertBefore(
                 shell,
-                certGrid
+                certifications
             );
 
-
-            shell.appendChild(
-                certGrid
-            );
-
+            shell.appendChild(certifications);
         }
 
+        if (!$(".carousel-controls", shell)) {
+            const controls = document.createElement("div");
 
-        if (
-            !$(".carousel-controls", shell)
-        ) {
-
-            const controls =
-                document.createElement(
-                    "div"
-                );
-
-            controls.className =
-                "carousel-controls";
-
+            controls.className = "carousel-controls";
 
             controls.innerHTML = `
                 <button
                     type="button"
-                    class="carousel-btn prev"
+                    class="carousel-btn carousel-prev"
                     aria-label="Certification précédente"
-                >
-                    <i class="fa fa-arrow-left"></i>
-                </button>
+                >‹</button>
 
                 <button
                     type="button"
-                    class="carousel-btn next"
+                    class="carousel-btn carousel-next"
                     aria-label="Certification suivante"
-                >
-                    <i class="fa fa-arrow-right"></i>
-                </button>
+                >›</button>
             `;
 
+            shell.appendChild(controls);
 
-            shell.appendChild(
-                controls
-            );
+            function scrollCertifications(direction) {
+                const firstCard = $(".certification-card", certifications);
 
+                if (!firstCard) return;
 
-            const previous =
-                $(".prev", controls);
+                const gap =
+                    parseFloat(getComputedStyle(certifications).gap) || 14;
 
-            const next =
-                $(".next", controls);
+                const distance =
+                    firstCard.getBoundingClientRect().width + gap;
 
-
-            previous.addEventListener(
-                "click",
-                () => {
-
-                    certGrid.scrollBy({
-                        left:
-                            -certGrid.clientWidth *
-                            0.78,
-
-                        behavior:
-                            scrollBehavior
-                    });
-
-                }
-            );
-
-
-            next.addEventListener(
-                "click",
-                () => {
-
-                    certGrid.scrollBy({
-                        left:
-                            certGrid.clientWidth *
-                            0.78,
-
-                        behavior:
-                            scrollBehavior
-                    });
-
-                }
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================
-       13. VEILLE REPLIABLE
-    ========================================================= */
-
-    const watch =
-        $("#veille .container");
-
-
-    if (watch) {
-
-        const details =
-            $$(
-                [
-                    ".key-points-grid",
-                    ".applications-area",
-                    ".sources-area"
-                ].join(","),
-                watch
-            );
-
-
-        if (
-            details.length > 0 &&
-            !$(".watch-collapsible", watch)
-        ) {
-
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
-
-            wrapper.className =
-                "watch-collapsible";
-
-
-            details[0].before(
-                wrapper
-            );
-
-
-            details.forEach(item => {
-
-                wrapper.appendChild(
-                    item
-                );
-
-            });
-
-
-            wrapper.style.maxHeight =
-                "0px";
-
-            wrapper.style.opacity =
-                "0";
-
-
-            const toggle =
-                document.createElement(
-                    "button"
-                );
-
-            toggle.type =
-                "button";
-
-            toggle.className =
-                "theme-btn watch-toggle";
-
-            toggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            toggle.innerHTML = `
-                <i class="fa fa-plus"></i>
-                Explorer la veille
-            `;
-
-
-            wrapper.after(
-                toggle
-            );
-
-
-            let isOpen =
-                false;
-
-
-            function updateWatchHeight() {
-
-                if (!isOpen) return;
-
-                wrapper.style.maxHeight =
-                    wrapper.scrollHeight +
-                    "px";
-
+                certifications.scrollBy({
+                    left: distance * direction,
+                    behavior: reduceMotion ? "auto" : "smooth"
+                });
             }
 
-
-            toggle.addEventListener(
+            $(".carousel-prev", controls)?.addEventListener(
                 "click",
-                () => {
+                () => scrollCertifications(-1)
+            );
 
-                    isOpen =
-                        !isOpen;
+            $(".carousel-next", controls)?.addEventListener(
+                "click",
+                () => scrollCertifications(1)
+            );
+        }
+    }
 
+    /* ======================================================
+       9. VEILLE TECHNOLOGIQUE
+       ====================================================== */
 
-                    wrapper.style.maxHeight =
-                        isOpen
-                            ? wrapper.scrollHeight +
-                              "px"
-                            : "0px";
+    const veille = $("#veille");
 
+    if (veille) {
+        const veilleContainer = $(".container", veille);
 
-                    wrapper.style.opacity =
-                        isOpen
-                            ? "1"
-                            : "0";
+        if (veilleContainer) {
+            const expandableElements = $$(
+                ".key-points-grid, .applications-area, .sources-area",
+                veilleContainer
+            );
 
+            if (
+                expandableElements.length > 0 &&
+                !$(".veille-toggle", veilleContainer)
+            ) {
+                const button = document.createElement("button");
 
-                    toggle.setAttribute(
+                button.type = "button";
+                button.className = "veille-toggle";
+                button.textContent = "Afficher les détails de la veille";
+
+                button.setAttribute("aria-expanded", "false");
+
+                const content = document.createElement("div");
+                content.className = "veille-extra";
+                content.hidden = true;
+
+                expandableElements[0].parentNode.insertBefore(
+                    content,
+                    expandableElements[0]
+                );
+
+                expandableElements.forEach(element => {
+                    content.appendChild(element);
+                });
+
+                content.parentNode.insertBefore(
+                    button,
+                    content
+                );
+
+                button.addEventListener("click", () => {
+                    const isOpen = content.hidden;
+
+                    content.hidden = !isOpen;
+
+                    button.setAttribute(
                         "aria-expanded",
                         String(isOpen)
                     );
 
-
-                    toggle.innerHTML =
-                        isOpen
-
-                            ? `
-                                <i class="fa fa-minus"></i>
-                                Réduire la veille
-                              `
-
-                            : `
-                                <i class="fa fa-plus"></i>
-                                Explorer la veille
-                              `;
-
-                }
-            );
-
-
-            window.addEventListener(
-                "resize",
-                updateWatchHeight
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================
-       14. NAVIGATION LATERALE
-    ========================================================= */
-
-    const existingSideNav =
-        $(".side-nav");
-
-    if (existingSideNav) {
-        existingSideNav.remove();
-    }
-
-
-    const sideNav =
-        document.createElement("div");
-
-    sideNav.className =
-        "side-nav";
-
-    sideNav.setAttribute(
-        "aria-label",
-        "Navigation rapide"
-    );
-
-
-    sections.forEach(section => {
-
-        const button =
-            document.createElement(
-                "button"
-            );
-
-        button.type =
-            "button";
-
-        button.className =
-            "side-dot";
-
-        button.dataset.target =
-            section.id;
-
-
-        const title =
-            $(".section-title h2", section);
-
-
-        button.title =
-            title
-                ? title.textContent.trim()
-                : section.id;
-
-
-        button.setAttribute(
-            "aria-label",
-            button.title
-        );
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                section.scrollIntoView({
-                    behavior:
-                        scrollBehavior,
-
-                    block:
-                        "start"
+                    button.textContent = isOpen
+                        ? "Masquer les détails de la veille"
+                        : "Afficher les détails de la veille";
                 });
-
             }
-        );
-
-
-        sideNav.appendChild(
-            button
-        );
-
-    });
-
-
-    if (sections.length > 0) {
-
-        document.body.appendChild(
-            sideNav
-        );
-
+        }
     }
 
+    /* ======================================================
+       10. NAVIGATION LATÉRALE
+       ====================================================== */
 
-    /* =========================================================
-       15. REVEAL AU SCROLL
-       COMPETENCES EXCLUES
-    ========================================================= */
+    let sideNav = $(".side-nav");
+
+    if (!sideNav && mainSections.length > 0) {
+        sideNav = document.createElement("nav");
+        sideNav.className = "side-nav";
+
+        sideNav.setAttribute(
+            "aria-label",
+            "Navigation entre les sections"
+        );
+
+        mainSections.forEach(section => {
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+            dot.className = "side-dot";
+
+            dot.dataset.target = section.id;
+
+            const sectionTitle =
+                $(".section-title h2", section)?.textContent ||
+                section.id;
+
+            dot.setAttribute(
+                "aria-label",
+                "Aller à " + sectionTitle
+            );
+
+            dot.title = sectionTitle;
+
+            dot.addEventListener("click", () => {
+                section.scrollIntoView({
+                    behavior: reduceMotion ? "auto" : "smooth",
+                    block: "start"
+                });
+            });
+
+            sideNav.appendChild(dot);
+        });
+
+        document.body.appendChild(sideNav);
+    }
+
+    /* ======================================================
+       11. ANIMATIONS AU DÉFILEMENT
+       ====================================================== */
 
     const revealSelectors = [
-
-        ".animate-on-scroll",
-
-        ".section-title",
-
         ".about-content",
-
         ".education-column",
-
+        ".competence-card",
         ".timeline-card",
-
-        ".project-card",
-
+        ".projet-domaine",
         ".certification-card",
-
         ".synthesis-wrapper",
-
         ".procedure-card",
-
         ".theme-banner",
-
         ".theme-description",
-
         ".point-card",
-
         ".application-item",
-
         ".source-category",
-
         ".hero-tech-panel"
+    ].join(",");
 
-    ];
+    const revealElements = $$(revealSelectors);
 
-
-    const allRevealElements = [
-
-        ...new Set(
-            $$(
-                revealSelectors.join(",")
-            )
-        )
-
-    ];
-
-
-    /*
-     * IMPORTANT :
-     * aucun élément interne d'une
-     * category-section n'est géré ici.
-     */
-
-    const revealElements =
-        allRevealElements.filter(
-            element => {
-
-                return !element.closest(
-                    "#competences .category-section"
-                );
-
+    if ("IntersectionObserver" in window && !reduceMotion) {
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.05,
+                rootMargin: "0px 0px -20px 0px"
             }
         );
 
-
-    revealElements.forEach(
-        (element, index) => {
-
-            element.classList.add(
-                "reveal-item"
-            );
-
-
-            const variation =
-                index % 4;
-
-
-            if (variation === 1) {
-
-                element.classList.add(
-                    "from-left"
-                );
-
-            }
-
-
-            else if (variation === 2) {
-
-                element.classList.add(
-                    "from-right"
-                );
-
-            }
-
-
-            else if (variation === 3) {
-
-                element.classList.add(
-                    "zoom-in"
-                );
-
-            }
-
+        revealElements.forEach((element, index) => {
+            element.classList.add("reveal-item");
 
             element.style.transitionDelay =
-                (
-                    (index % 5) *
-                    45
-                ) +
-                "ms";
+                ((index % 4) * 40) + "ms";
 
-        }
-    );
-
-
-    if (
-        "IntersectionObserver" in window &&
-        !reduceMotion
-    ) {
-
-        const observer =
-            new IntersectionObserver(
-
-                entries => {
-
-                    entries.forEach(
-                        entry => {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry.target
-                                    .classList
-                                    .add(
-                                        "is-visible"
-                                    );
-
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
-                    );
-
-                },
-
-                {
-                    threshold: 0.06,
-
-                    rootMargin:
-                        "0px 0px -25px 0px"
-                }
-
-            );
-
-
-        revealElements.forEach(
-            element => {
-
-                observer.observe(
-                    element
-                );
-
-            }
-        );
-
+            observer.observe(element);
+        });
+    } else {
+        revealElements.forEach(element => {
+            element.classList.add("is-visible");
+        });
     }
 
-    else {
-
-        revealElements.forEach(
-            element => {
-
-                element.classList.add(
-                    "is-visible"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================
-       16. MOUSE GLOW
-    ========================================================= */
+    /* ======================================================
+       12. EFFET LUMINEUX À LA SOURIS
+       ====================================================== */
 
     const glowSelectors = [
-
-        ".project-card",
-        ".skill-badge",
+        ".projet-domaine",
+        ".competence-card",
         ".certification-card",
         ".procedure-card",
         ".timeline-card",
@@ -1907,368 +861,255 @@ document.addEventListener("DOMContentLoaded", () => {
         ".application-item",
         ".source-category",
         ".education-column"
+    ].join(",");
 
-    ];
+    $$(glowSelectors).forEach(card => {
+        card.classList.add("mouse-glow");
 
+        card.addEventListener("pointermove", event => {
+            const rect = card.getBoundingClientRect();
 
-    const glowCards =
-        $$(
-            glowSelectors.join(",")
-        );
+            card.style.setProperty(
+                "--x",
+                (event.clientX - rect.left) + "px"
+            );
 
-
-    glowCards.forEach(card => {
-
-        card.classList.add(
-            "mouse-glow"
-        );
-
-
-        card.addEventListener(
-            "pointermove",
-            event => {
-
-                const rect =
-                    card.getBoundingClientRect();
-
-
-                const x =
-                    event.clientX -
-                    rect.left;
-
-
-                const y =
-                    event.clientY -
-                    rect.top;
-
-
-                card.style.setProperty(
-                    "--x",
-                    x + "px"
-                );
-
-
-                card.style.setProperty(
-                    "--y",
-                    y + "px"
-                );
-
-            }
-        );
-
+            card.style.setProperty(
+                "--y",
+                (event.clientY - rect.top) + "px"
+            );
+        });
     });
 
+    /* ======================================================
+       13. EFFET RIPPLE SUR LES BOUTONS
+       ====================================================== */
 
-    /* =========================================================
-       17. RIPPLE
-    ========================================================= */
-
-    const rippleSelector = [
-
+    const rippleSelectors = [
         ".btn",
         ".cert-link",
         ".synthesis-download-btn",
         ".synthesis-view-btn",
         ".theme-btn",
-        ".skills-tab",
-        ".project-filter",
-        ".projects-more",
-        ".carousel-btn"
-
+        ".carousel-btn",
+        ".projet-open",
+        ".veille-toggle"
     ].join(",");
 
+    document.addEventListener("click", event => {
+        if (reduceMotion) return;
+        if (!(event.target instanceof Element)) return;
 
-    document.addEventListener(
-        "click",
-        event => {
+        const button = event.target.closest(rippleSelectors);
 
-            if (reduceMotion) return;
+        if (!button) return;
 
+        const rect = button.getBoundingClientRect();
 
-            const button =
-                event.target.closest(
-                    rippleSelector
-                );
+        const diameter = Math.max(rect.width, rect.height);
 
+        const ripple = document.createElement("span");
 
-            if (!button) return;
+        ripple.className = "ripple-effect";
 
+        ripple.style.width = diameter + "px";
+        ripple.style.height = diameter + "px";
 
-            const rect =
-                button.getBoundingClientRect();
+        ripple.style.left =
+            (event.clientX - rect.left - diameter / 2) + "px";
 
+        ripple.style.top =
+            (event.clientY - rect.top - diameter / 2) + "px";
 
-            const diameter =
-                Math.max(
-                    rect.width,
-                    rect.height
-                );
+        button.appendChild(ripple);
 
+        ripple.addEventListener(
+            "animationend",
+            () => ripple.remove(),
+            { once: true }
+        );
 
-            const ripple =
-                document.createElement(
-                    "span"
-                );
+        // Évite les éléments résiduels si l'animation CSS manque.
+        setTimeout(() => ripple.remove(), 1500);
+    });
 
-
-            ripple.className =
-                "ripple-effect";
-
-
-            ripple.style.width =
-                diameter + "px";
-
-
-            ripple.style.height =
-                diameter + "px";
-
-
-            ripple.style.left =
-                (
-                    event.clientX -
-                    rect.left -
-                    diameter / 2
-                ) +
-                "px";
-
-
-            ripple.style.top =
-                (
-                    event.clientY -
-                    rect.top -
-                    diameter / 2
-                ) +
-                "px";
-
-
-            button.appendChild(
-                ripple
-            );
-
-
-            ripple.addEventListener(
-                "animationend",
-                () => ripple.remove(),
-                {
-                    once: true
-                }
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       18. PETIT EFFET 3D
-    ========================================================= */
+    /* ======================================================
+       14. EFFET 3D SUR LES CARTES
+       ====================================================== */
 
     if (
         !reduceMotion &&
-        window.matchMedia(
-            "(pointer: fine)"
-        ).matches
+        window.matchMedia("(pointer: fine)").matches
     ) {
-
-        const tiltCards =
-            $$(
-                [
-                    ".project-card",
-                    ".certification-card"
-                ].join(",")
-            );
-
+        const tiltCards = $$(
+            ".projet-domaine, .certification-card"
+        );
 
         tiltCards.forEach(card => {
+            card.addEventListener("pointermove", event => {
+                const rect = card.getBoundingClientRect();
 
-            card.addEventListener(
-                "pointermove",
-                event => {
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
 
-                    const rect =
-                        card.getBoundingClientRect();
+                const rotateY =
+                    (x / rect.width - 0.5) * 2;
 
+                const rotateX =
+                    -(y / rect.height - 0.5) * 2;
 
-                    const x =
-                        event.clientX -
-                        rect.left;
+                card.style.transform = `
+                    perspective(900px)
+                    translateY(-5px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                `;
+            });
 
-
-                    const y =
-                        event.clientY -
-                        rect.top;
-
-
-                    const rotateY =
-                        (
-                            x /
-                            rect.width -
-                            0.5
-                        ) *
-                        2.2;
-
-
-                    const rotateX =
-                        -(
-                            y /
-                            rect.height -
-                            0.5
-                        ) *
-                        2.2;
-
-
-                    card.style.transform =
-                        `
-                        perspective(900px)
-                        translateY(-6px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        `;
-
-                }
-            );
-
-
-            card.addEventListener(
-                "pointerleave",
-                () => {
-
-                    card.style.transform =
-                        "";
-
-                }
-            );
-
+            card.addEventListener("pointerleave", () => {
+                card.style.transform = "";
+            });
         });
-
     }
 
+    /* ======================================================
+       15. BLACK HOLE N°28
+       ====================================================== */
 
-    /* =========================================================
-       19. SECTION ACTIVE
-    ========================================================= */
+    const blackHoleSelectors = [
+        ".competence-card",
+        ".timeline-card",
+        ".projet-domaine",
+        ".certification-card",
+        ".procedure-card",
+        ".point-card",
+        ".application-item",
+        ".source-category",
+        ".education-column",
+        ".entry-content",
+        ".hero-tech-panel",
+        ".about-content",
+        ".synthesis-wrapper",
+        ".theme-description",
+        ".tech-chip",
+        ".theme-banner"
+    ].join(",");
+
+    const blackHoleTimers = new WeakMap();
+
+    $$(blackHoleSelectors).forEach(card => {
+        card.classList.add("blackhole28-card");
+
+        if (!$(":scope > .blackhole28-overlay", card)) {
+            const overlay = document.createElement("span");
+
+            overlay.className = "blackhole28-overlay";
+            overlay.setAttribute("aria-hidden", "true");
+
+            card.appendChild(overlay);
+        }
+    });
+
+    document.addEventListener("click", event => {
+        if (reduceMotion) return;
+        if (!(event.target instanceof Element)) return;
+
+        const card = event.target.closest(".blackhole28-card");
+
+        if (!card) return;
+
+        const previousTimer = blackHoleTimers.get(card);
+
+        if (previousTimer) clearTimeout(previousTimer);
+
+        card.classList.remove("blackhole28-active");
+
+        void card.offsetWidth;
+
+        card.classList.add("blackhole28-active");
+
+        const timer = setTimeout(() => {
+            card.classList.remove("blackhole28-active");
+            blackHoleTimers.delete(card);
+        }, 1300);
+
+        blackHoleTimers.set(card, timer);
+    });
+
+    /* ======================================================
+       16. SECTION ACTIVE
+       ====================================================== */
 
     function updateActiveSection() {
-
-        if (header) {
-
-            header.classList.toggle(
-                "scrolled",
-                window.scrollY > 20
-            );
-
-        }
-
+        header?.classList.toggle(
+            "scrolled",
+            window.scrollY > 20
+        );
 
         updateProgress();
 
+        let activeId = "home";
+        const scrollPosition = window.scrollY + 160;
 
-        let currentSection =
-            sections.length > 0
-                ? sections[0].id
-                : "home";
-
-
-        const position =
-            window.scrollY +
-            160;
-
-
-        sections.forEach(section => {
-
-            if (
-                section.offsetTop <=
-                position
-            ) {
-
-                currentSection =
-                    section.id;
-
+        mainSections.forEach(section => {
+            if (section.offsetTop <= scrollPosition) {
+                activeId = section.id;
             }
-
         });
-
 
         navLinks.forEach(link => {
-
-            const active =
-                link.getAttribute(
-                    "href"
-                ) ===
-                "#" +
-                currentSection;
-
-
             link.classList.toggle(
                 "active",
-                active
+                link.getAttribute("href") === "#" + activeId
             );
-
         });
 
-
-        $$(".side-dot", sideNav)
-            .forEach(dot => {
-
+        if (sideNav) {
+            $$(".side-dot", sideNav).forEach(dot => {
                 dot.classList.toggle(
                     "active",
-                    dot.dataset.target ===
-                        currentSection
+                    dot.dataset.target === activeId
                 );
-
             });
-
-    }
-
-
-    /* =========================================================
-       20. RESIZE
-    ========================================================= */
-
-    function handleResize() {
-
-        updateActiveSection();
-
-
-        if (
-            window.innerWidth > 980
-        ) {
-
-            closeMenu();
-
         }
-
     }
 
+    /* ======================================================
+       17. INITIALISATION
+       ====================================================== */
 
-    /* =========================================================
-       21. INITIALISATION
-    ========================================================= */
-
-    updateProgress();
     updateActiveSection();
-
 
     window.addEventListener(
         "scroll",
         updateActiveSection,
-        {
-            passive: true
-        }
+        { passive: true }
     );
-
 
     window.addEventListener(
         "resize",
-        handleResize,
-        {
-            passive: true
-        }
+        () => {
+            updateActiveSection();
+
+            if (window.innerWidth > 980) {
+                closeMobileMenu();
+            }
+        },
+        { passive: true }
     );
 
-
     console.log(
-        "%cPORTFOLIO ASVIN — JS chargé",
+        "%cPORTFOLIO BTS SIO SISR — JavaScript chargé",
         "color:#9c82ff;font-weight:bold;"
     );
 
+    console.log(
+        "[PROJETS] Boutons détectés :",
+        $$("#pro .projet-open").length
+    );
+
+    console.log(
+        "[BLACK HOLE 28] Cartes initialisées :",
+        $$(".blackhole28-card").length
+    );
 });
