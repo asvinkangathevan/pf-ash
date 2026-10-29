@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
-/* =========================================================
-   ASVIN KANGATHEVAN — PORTFOLIO V2
-   COMPLETE CSS
-========================================================= */
+
 :root {
     --bg: #030307;
     --bg-soft: #06060d;
@@ -20,9 +17,7 @@
     --radius: 18px;
     --ease: cubic-bezier(.2, .75, .2, 1);
 }
-/* =========================================================
-   RESET
-========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -41,10 +36,7 @@ body {
     background-attachment: fixed;
     line-height: 1.6;
 }
-/* =========================================================
-   BACKGROUND
-   PAS DE PETITS CARRÉS
-========================================================= */
+
 body::before {
     content: "";
     position: fixed;
@@ -131,9 +123,7 @@ section {
     border-bottom:
         1px solid rgba(255,255,255,.025);
 }
-/* =========================================================
-   SCROLLBAR
-========================================================= */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -164,9 +154,7 @@ section {
     box-shadow:
         0 0 18px rgba(112,71,255,.9);
 }
-/* =========================================================
-   NAVIGATION
-========================================================= */
+
 .header-area {
     position: fixed;
     top: 14px;
@@ -286,9 +274,7 @@ section {
     font-size: 21px;
     cursor: pointer;
 }
-/* =========================================================
-   HERO
-========================================================= */
+
 .hero-section {
     padding:
         145px 0
@@ -365,9 +351,7 @@ section {
 .btn-group {
     margin-top: 27px;
 }
-/* =========================================================
-   BUTTONS
-========================================================= */
+
 .btn,
 .cert-link,
 .synthesis-download-btn,
@@ -437,9 +421,7 @@ section {
 .theme-btn:hover::before {
     left: 125%;
 }
-/* =========================================================
-   SOCIAL
-========================================================= */
+
 .social {
     margin-top: 19px;
     display: flex;
@@ -477,9 +459,7 @@ section {
     box-shadow:
         0 12px 30px rgba(91,53,215,.16);
 }
-/* =========================================================
-   HERO TECH PANEL
-========================================================= */
+
 .hero-tech-panel {
     position: relative;
     min-height: 330px;
@@ -603,9 +583,7 @@ section {
     animation:
         pulse 1.7s ease-in-out infinite;
 }
-/* =========================================================
-   SECTION TITLES
-========================================================= */
+
 .section-title {
     margin-bottom: 30px;
     display: flex;
@@ -690,9 +668,7 @@ section {
             var(--purple-2)
         );
 }
-/* =========================================================
-   GENERAL CARDS
-========================================================= */
+
 .about-content,
 .education-column,
 .timeline-card,
@@ -715,9 +691,7 @@ section {
     box-shadow:
         0 12px 38px rgba(0,0,0,.18);
 }
-/* =========================================================
-   PROFILE
-========================================================= */
+
 .about-content {
     position: relative;
     max-width: 1180px;
@@ -763,9 +737,7 @@ section {
 .about-content strong {
     color: #fff;
 }
-/* =========================================================
-   PARCOURS
-========================================================= */
+
 .education-grid {
     display: grid;
     grid-template-columns:
@@ -878,21 +850,16 @@ section {
         rgba(112,71,255,.08);
     font-size: 8px;
 }
-/* =========================================================
-   COMPÉTENCES — VERSION STABLE / CORRIGÉE
-   Toutes les catégories restent visibles.
-   Aucun active-category n'est nécessaire.
-========================================================= */
+
 .competences-area {
     position: relative;
     overflow: visible;
 }
-/* Si un ancien JS crée des onglets, on les masque.
-   Le contenu des compétences reste entièrement visible. */
+
 #competences .skills-tabs {
     display: none !important;
 }
-/* Toutes les catégories sont toujours affichées */
+
 #competences .category-section,
 #competences .category-section.active-category {
     position: relative;
@@ -906,8 +873,7 @@ section {
 #competences .category-section:last-child {
     margin-bottom: 0;
 }
-/* Neutralise les anciennes animations reveal uniquement
-   à l'intérieur de la section Compétences */
+
 #competences .category-section.reveal-item,
 #competences .category-section .reveal-item,
 #competences .category-header,
@@ -923,7 +889,7 @@ section {
 #competences .skills-flow {
     transform: none !important;
 }
-/* En-tête de catégorie */
+
 .category-header {
     position: relative;
     display: flex;
@@ -969,13 +935,13 @@ section {
     font: 700 16px Manrope, Inter, sans-serif;
     letter-spacing: -.2px;
 }
-/* Grille */
+
 .skills-flow {
     display: grid !important;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 11px;
 }
-/* Carte compétence */
+
 .skill-badge {
     position: relative;
     min-width: 0;
@@ -1058,7 +1024,7 @@ section {
     opacity: 1;
     transform: translate(-20px,25px) scale(1.2);
 }
-/* Images */
+
 .skill-badge img {
     position: relative;
     z-index: 2;
@@ -1083,7 +1049,7 @@ section {
     height: 44px;
     margin-right: 5px;
 }
-/* Texte */
+
 .skill-badge span {
     position: relative;
     z-index: 2;
@@ -1103,7 +1069,7 @@ section {
     line-height: 1.55;
     opacity: 1 !important;
 }
-/* Liens de documents */
+
 .doc-link {
     position: relative;
     z-index: 3;
@@ -1122,7 +1088,7 @@ section {
     color: #fff;
     transform: translateX(3px);
 }
-/* Responsive Compétences */
+
 @media (max-width: 1180px) {
     .skills-flow {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1151,9 +1117,7 @@ section {
         grid-template-columns: 1fr;
     }
 }
-/* =========================================================
-   EXPERIENCES
-========================================================= */
+
 .timeline-wrapper {
     display: grid;
     grid-template-columns:
@@ -1215,9 +1179,7 @@ section {
     font-size: 9px;
     opacity: 1;
 }
-/* =========================================================
-   PROJECT FILTER
-========================================================= */
+
 .project-toolbar {
     margin-bottom: 18px;
     display: flex;
@@ -1275,9 +1237,7 @@ section {
     box-shadow:
         0 8px 25px rgba(99,58,230,.24);
 }
-/* =========================================================
-   PROJECT CARDS
-========================================================= */
+
 .projects-grid {
     display: grid;
     grid-template-columns:
@@ -1345,10 +1305,7 @@ section {
     color: #fff;
     font-size: 12px;
 }
-/*
-   PAS DE MASK-IMAGE.
-   Le texte reste net.
-*/
+
 .project-description {
     max-height: none;
     overflow: visible;
@@ -1403,9 +1360,7 @@ section {
     color: var(--purple-2);
     font-size: 8px;
 }
-/* =========================================================
-   PROJECT MODAL
-========================================================= */
+
 .project-modal {
     position: fixed;
     inset: 0;
@@ -1497,9 +1452,7 @@ section {
 .project-modal-content .team-section {
     display: block;
 }
-/* =========================================================
-   CERTIFICATIONS
-========================================================= */
+
 .cert-carousel-shell {
     position: relative;
 }
@@ -1616,9 +1569,7 @@ section {
     background:
         rgba(112,71,255,.14);
 }
-/* =========================================================
-   SYNTHÈSE
-========================================================= */
+
 .docs-combined {
     display: grid;
     grid-template-columns:
@@ -1660,9 +1611,7 @@ section {
     color: #aaa5b5;
     font-size: 9px;
 }
-/* =========================================================
-   PROCEDURES
-========================================================= */
+
 .procedures-grid {
     display: grid;
     grid-template-columns:
@@ -1730,9 +1679,7 @@ section {
     font-size: 7px;
     text-transform: uppercase;
 }
-/* =========================================================
-   VEILLE
-========================================================= */
+
 .theme-banner {
     position: relative;
     padding: 22px;
@@ -1925,9 +1872,7 @@ section {
         0;
     display: flex;
 }
-/* =========================================================
-   FOOTER
-========================================================= */
+
 .footer {
     padding:
         38px 0;
@@ -1986,9 +1931,7 @@ section {
     display: flex;
     gap: 8px;
 }
-/* =========================================================
-   SIDE NAVIGATION
-========================================================= */
+
 .side-nav {
     position: fixed;
     right: 20px;
@@ -2041,9 +1984,7 @@ section {
     box-shadow:
         0 0 15px rgba(112,71,255,.5);
 }
-/* =========================================================
-   MOUSE GLOW
-========================================================= */
+
 .mouse-glow {
     position: relative;
     overflow: hidden;
@@ -2074,9 +2015,7 @@ section {
     position: relative;
     z-index: 1;
 }
-/* =========================================================
-   REVEAL ON SCROLL
-========================================================= */
+
 .reveal-item {
     opacity: 0;
     transform:
@@ -2107,11 +2046,7 @@ section {
         scale(1);
     filter: blur(0);
 }
-/*
-   IMPORTANT :
-   COMPÉTENCES NE DOIT PAS DÉPENDRE
-   D'INTERSECTION OBSERVER.
-*/
+
 #competences .skills-tabs,
 #competences .category-section.active-category,
 #competences .category-section.active-category .category-header,
@@ -2121,9 +2056,7 @@ section {
     visibility: visible !important;
     filter: none !important;
 }
-/* =========================================================
-   RIPPLE
-========================================================= */
+
 .ripple-effect {
     position: absolute;
     z-index: 30;
@@ -2147,9 +2080,7 @@ section {
         transform: scale(.8);
     }
 }
-/* =========================================================
-   TEXT VISIBILITY FIX
-========================================================= */
+
 .about-content p,
 .project-description p,
 .timeline-place,
@@ -2164,9 +2095,7 @@ section {
     filter: none;
     text-shadow: none;
 }
-/* =========================================================
-   RESPONSIVE 1200
-========================================================= */
+
 @media (max-width: 1200px) {
     .nav-link {
         padding:
@@ -2190,9 +2119,7 @@ section {
             calc((100% - 28px) / 3);
     }
 }
-/* =========================================================
-   RESPONSIVE TABLET
-========================================================= */
+
 @media (max-width: 980px) {
     .header {
         width: 92%;
@@ -2287,9 +2214,7 @@ section {
         display: none;
     }
 }
-/* =========================================================
-   RESPONSIVE MOBILE
-========================================================= */
+
 @media (max-width: 650px) {
     html {
         scroll-padding-top: 88px;
@@ -2371,9 +2296,7 @@ section {
             22px 19px;
     }
 }
-/* =========================================================
-   VERY SMALL
-========================================================= */
+
 @media (max-width: 420px) {
     .skills-flow {
         grid-template-columns: 1fr;
@@ -2385,9 +2308,7 @@ section {
         grid-template-columns: 1fr;
     }
 }
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -2404,9 +2325,7 @@ section {
         filter: none !important;
     }
 }
-/* =========================================================
-   GARDE-FOU FINAL — COMPÉTENCES TOUJOURS VISIBLES
-========================================================= */
+
 #competences .category-section,
 #competences .category-section.active-category {
     display: block !important;
@@ -2423,9 +2342,7 @@ section {
     opacity: 1 !important;
     visibility: visible !important;
 }
-/* =========================================================
-   COMPÉTENCES — 3 COLONNES, THÈME NOIR / BLANC / VIOLET
-   ========================================================= */
+
 #competences {
     position: relative;
     overflow: visible;
@@ -2542,13 +2459,13 @@ section {
 @media (prefers-reduced-motion: reduce) {
     #competences .competence-card, #competences .competence-tag { transition: none; }
 }
-/* FOND UNIFORME SUR TOUTES LES SECTIONS */
+
 html { background: #06050c; }
 body { background: radial-gradient(ellipse 75% 60% at 15% 18%, rgba(112,71,255,.085), transparent 72%), radial-gradient(ellipse 60% 65% at 90% 78%, rgba(112,71,255,.06), transparent 75%), #06050c; background-attachment: fixed; }
 body::before, body::after { display: none; }
 body > section, main > section, #competences, .competences-area, .experiences-area, .projects-area { background: transparent !important; background-color: transparent !important; }
 #competences::before, #competences::after { content: none !important; display: none !important; }
-/* COMPETENCES : CARTES COMPACTES ET HOMOGENES */
+
 #competences .competences-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
 #competences .competence-card { min-height: 150px; height: auto; padding: 18px 17px; border-radius: 14px; background: linear-gradient(145deg, rgba(13,15,23,.94), rgba(7,8,14,.94)); border: 1px solid rgba(255,255,255,.075); box-shadow: 0 12px 38px rgba(0,0,0,.18); }
 #competences .competence-card-title { margin: 0 0 14px; gap: 9px; font-size: 15px; line-height: 1.35; color: #c4b3ff; }
@@ -2559,10 +2476,7 @@ body > section, main > section, #competences, .competences-area, .experiences-ar
 #competences .competence-doc-link { min-height: 30px; padding: 5px 9px; font-size: 10px; }
 @media (max-width: 1100px) { #competences .competences-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 650px) { #competences .competences-grid { grid-template-columns: 1fr; } #competences .competence-card { min-height: 0; } }
-/* =========================================================
-   CARTES A ANGLES DROITS — STYLE CARRE
-   Conserve les points ronds et la navigation.
-========================================================= */
+
 :root { --radius: 0px; }
 #competences .competence-card,
 #competences .competence-tag,
@@ -2593,21 +2507,6 @@ body > section, main > section, #competences, .competences-area, .experiences-ar
     border-radius: 0 !important;
 }
 
-/* N°28 BLACK HOLE — correction: animation sans transform/opacity !important */
-.blackhole28-card{position:relative;isolation:isolate;border-radius:0!important}
-.blackhole28-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;overflow:hidden;opacity:0;border-radius:0;display:block}
-.blackhole28-overlay::before{content:"";position:absolute;left:50%;top:50%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#000 0 18%,#10041e 20%,#3b16a3 25%,#a68cff 29%,#7047ff 34%,rgba(112,71,255,.22) 42%,transparent 66%),repeating-conic-gradient(from 0deg,#7047ff 0deg 9deg,transparent 13deg 24deg,#b49fff 27deg 30deg,transparent 35deg 45deg);box-shadow:0 0 35px #7047ff88;filter:drop-shadow(0 0 10px #7047ff);transform:translate(-50%,-50%) scale(.05);opacity:0}
-.blackhole28-card.blackhole28-active>.blackhole28-overlay{opacity:1}
-.blackhole28-card.blackhole28-active>.blackhole28-overlay::before{animation:blackhole28-vortex 1.3s cubic-bezier(.18,.75,.22,1) both}
-.blackhole28-card.blackhole28-active{animation:blackhole28-pulse 1.3s ease-out}
-@keyframes blackhole28-vortex{0%{transform:translate(-50%,-50%) scale(.05) rotate(0deg);opacity:0}18%{opacity:1}60%{transform:translate(-50%,-50%) scale(1.05) rotate(360deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1.8) rotate(720deg);opacity:0}}
-@keyframes blackhole28-pulse{0%,100%{box-shadow:0 12px 38px #0003}50%{box-shadow:0 0 30px #7047ff99,0 0 55px #7047ff44}}
-@media(prefers-reduced-motion:reduce){.blackhole28-card.blackhole28-active,.blackhole28-card.blackhole28-active>.blackhole28-overlay::before{animation:none}}
-
-/* =========================================================
-   CORRECTION VEILLE TECHNOLOGIQUE — IDS / NDR / SIEM
-   Limitee a #veille : aucune autre section modifiee.
-   ========================================================= */
 #veille .applications-area .app-content { min-width: 0; }
 #veille .applications-area .app-content h4 {
     font-family: Manrope, Inter, sans-serif;
@@ -2649,3 +2548,100 @@ body > section, main > section, #competences, .competences-area, .experiences-ar
     #veille .applications-area .app-content li { font-size: 10px; line-height: 1.6; }
     #veille .applications-area .app-content h4 { font-size: 11px; }
 }
+
+#pro { padding:76px 0; color:#f4f3f8; }
+    #pro .projets-wrap { width:min(1540px,calc(100% - 36px)); margin:auto; }
+    
+    #pro .section-title { display:flex; align-items:center; gap:14px; margin-bottom:30px; text-align:left; }
+    #pro .section-title h2 { flex:0 0 auto; margin:0; color:#fff; font:800 clamp(25px,3vw,38px) Manrope,sans-serif; letter-spacing:-1px; line-height:1.2; }
+    #pro .section-title .title-line { position:relative; flex:1; height:1px; background:linear-gradient(90deg,rgba(112,71,255,.55),transparent); }
+    #pro .projets-grid-custom { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    #pro .projet-domaine { box-sizing:border-box; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:13px; padding:23px; min-height:252px; border:1px solid #1a1a27; border-radius:0; background:#0b0d13; box-shadow:none; transition:border-color .2s,transform .2s; }
+    #pro .projet-domaine:hover { border-color:#6d4ed6; transform:translateY(-3px); }
+    #pro .projet-icon svg { display:block; width:23px; height:23px; flex-shrink:0; }
+    #pro .projet-icon { display:flex; align-items:center; justify-content:center; width:48px; height:48px; flex-shrink:0; background:#19142f; color:#9976ff; border:1px solid #211a3b; border-radius:0; font-size:21px; }
+    #pro .projet-domaine h3 { margin:0; font-size:1rem; font-weight:700; line-height:1.35; color:#fff; }
+    #pro .projet-domaine .projet-resume { margin:0; font-size:.82rem; line-height:1.65; color:#aaa9b9; flex:1; }
+    #pro .projet-count { font-size:.75rem; color:#938ca9; }
+    #pro .projet-open { align-self:flex-end; background:transparent; border:0; border-radius:0; color:#9875ff; padding:6px 0; font:inherit; font-size:.84rem; font-weight:600; cursor:pointer; transition:background .2s,border-color .2s; }
+    #pro .projet-open:hover,#pro .projet-open:focus-visible { background:transparent; color:#c3afff; }
+    #pro .projets-detail { margin-top:22px; padding:24px; border:1px solid #292039; border-radius:0; background:#0b0d13; color:#f5f2ff; }
+    #pro .projets-detail[hidden] { display:none !important; }
+    #pro .detail-head { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:17px; }
+    #pro .detail-head h3 { margin:0; font-size:1.4rem; }
+    #pro .detail-close { background:#19142f; border:1px solid #33244d; color:#eee; padding:8px 12px; border-radius:0; cursor:pointer; font:inherit; }
+    #pro .detail-description { color:#aaa9b9; line-height:1.7; margin:0 0 20px; }
+    #pro .detail-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    #pro .detail-item { padding:16px; border:1px solid #242032; border-radius:0; background:#111019; }
+    #pro .detail-item h4 { margin:0 0 7px; font-size:1rem; color:#fff; }
+    #pro .detail-item p { margin:0 0 12px; font-size:.88rem; color:#aaa9b9; line-height:1.55; }
+    #pro .detail-item a { color:#a88aff; text-decoration:underline; text-underline-offset:3px; font-size:.88rem; }
+    #pro .detail-item a:hover { color:#fff; }
+    @media(max-width:950px){#pro .projets-grid-custom{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media(max-width:620px){#pro .projets-grid-custom,#pro .detail-list{grid-template-columns:1fr;}#pro .projet-domaine{padding:21px;min-height:245px;}#pro .projets-detail{padding:18px;}}
+
+#pro .projets-detail[hidden] { display: none !important; }
+#pro .projets-detail:not([hidden]) { display: block !important; visibility: visible; opacity: 1; }
+#pro .projets-detail .detail-item { position: relative; min-width: 0; }
+#pro .projet-open { position: relative; z-index: 2; }
+#pro .projet-open:focus-visible, #pro .detail-close:focus-visible, #pro .detail-pdf:focus-visible { outline: 2px solid #b49fff; outline-offset: 4px; }
+#pro .projet-open[aria-expanded="true"] { color: #d5c7ff; }
+#pro .projets-detail { scroll-margin-top: 110px; }
+#pro .detail-pdf { display: inline-flex; align-items: center; min-height: 32px; }
+@media (max-width: 620px) { #pro .detail-head { align-items: center; } #pro .detail-head h3 { font-size: 1.15rem; } }
+
+#pro .projets-wrap {
+    width: min(1320px, 92%) !important;
+    max-width: 1320px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#pro .section-title {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+#pro .projets-grid-custom {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+#pro .projet-domaine {
+    min-width: 0;
+    min-height: 245px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#pro .projet-open {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+#pro .projets-detail {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 950px) {
+    #pro .projets-grid-custom {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    #pro .projets-grid-custom {
+        grid-template-columns: 1fr;
+    }
+
+    #pro .projets-wrap {
+        width: 92% !important;
+    }
+}
+
+.blackhole28-overlay, .blackhole28-card > .blackhole28-overlay { display: none !important; animation: none !important; }
